@@ -1,0 +1,47 @@
+Developer
+        │
+        ▼
+Self-Service Portal
+        │
+        ▼
+Platform API (FastAPI)
+        │
+        ▼
+Step Functions
+        │
+ ┌──────┼──────────┐
+ │      │          │
+ ▼      ▼          ▼
+
+Terraform
+IAM
+Secrets Manager
+
+        │
+        ▼
+
+AWS Services
+(EKS, VPC, S3, RDS)
+
+        ▲
+        │
+
+Governance Layer
+Organizations
+Control Tower
+SCPs
+Budgets
+
+        ▲
+        │
+
+Observability
+Grafana
+Prometheus
+Loki
+
+        ▲
+        │
+
+AI Assistant
+Human Approval Required

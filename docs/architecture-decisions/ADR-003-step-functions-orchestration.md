@@ -22,3 +22,27 @@ Workflow execution history can serve as audit evidence.
 EOF
 
 cat > docs/architecture-decisions/ADR-004-ai-human-approval-model.md <<'EOF'
+
+------------------------------------------------
+Why Step Functions instead of:
+Lambda calling Lambda calling Lambda...
+
+Answer;
+
+Because TITAN is a workflow platform.
+
+Example:
+
+Developer Requests Environment
+            ↓
+Approval
+            ↓
+Terraform
+            ↓
+Validation
+            ↓
+Notification
+
+That's orchestration.. Step Functions were literally built for this.
+
+-----------------------------------------------

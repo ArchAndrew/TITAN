@@ -22,3 +22,35 @@ CI/CD workflows must include validation, planning, scanning, and approval gates.
 EOF
 
 cat > docs/architecture-decisions/ADR-003-step-functions-orchestration.md <<'EOF'
+
+------------------------------------------------
+#Why Terraform instead of CloudFormation?
+
+Context:
+Need repeatable infrastructure deployment.
+
+Need;
+
+AWS
+Azure
+Future GCP
+Platform provisioning
+Governance
+
+Decision - Terraform.
+
+Why
+Multi-cloud
+Larger ecosystem
+Industry adoption
+Module reuse
+Recruiter demand
+
+Consequence
+Need:
+
+State management
+Module governance
+Security validation
+-----------------------------------------------
+
