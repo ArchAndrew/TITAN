@@ -1,4 +1,4 @@
-ADR-004: Require Human Approval for AI-Assisted Actions
+# ADR-004: Require Human Approval for AI-Assisted Actions
 Status
 
 Accepted

@@ -77,4 +77,31 @@ During architecture planning, Terraform-only was initially considered. After eva
 
 --------------------------------------------------
 
+Architecture Refactor: Migrated environment management from Terraform environment folders to Terragrunt live environments. This reduces duplication and better aligns TITAN with enterprise-scale platform engineering practices.
+
+--------------------------------------------------
+
+TITAN Design Principle #1
+
+No implementation before architecture.
+
+TITAN Design Principle #2
+
+No architecture before governance.
+
+TITAN Design Principle #3
+
+Every platform capability must map to a workflow.
+
+TITAN Design Principle #4
+
+Every workflow must map to a control.
+
+TITAN Design Principle #5
+
+Every control must generate evidence.
+
+----------------------------------------------------
+
+
 

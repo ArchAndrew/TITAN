@@ -1,4 +1,4 @@
-ADR-005: Embed Governance Into Platform Workflows
+# ADR-005: Embed Governance Into Platform Workflows
 Status
 
 Accepted
