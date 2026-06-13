@@ -55,3 +55,26 @@ What was built
 Example:
 
 Platform Engineering differs from traditional DevOps because the objective is enabling engineers to consume infrastructure safely rather than manually operating infrastructure. Traditional DevOps runs infrastructure, while platform engineering enables governed infrastructure consumption at scale.
+
+Session 002
+
+Time Spent:
+~2.5 hours
+
+Completed:
+- Created GitHub repository
+- Established README
+- Created ADR framework
+- Completed ADR-001
+
+Key Insight:
+TITAN is not a DevOps platform.
+TITAN is a governance-first platform engineering system that enables secure self-service infrastructure consumption.
+
+-------------------------------------------------
+
+During architecture planning, Terraform-only was initially considered. After evaluating the expected growth of TITAN, Terragrunt was adopted to reduce environment duplication, simplify orchestration, and better support enterprise-scale platform engineering practices.
+
+--------------------------------------------------
+
+
