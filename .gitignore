@@ -1,0 +1,36 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+
+# Terragrunt
+**/.terragrunt-cache/*
+
+# Environment Variables
+.env
+.env.*
+
+# Certificates / Keys
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
