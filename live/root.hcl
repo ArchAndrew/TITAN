@@ -13,12 +13,17 @@ locals {
 remote_state {
   backend = "s3"
 
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+
   config = {
-    bucket         = "titan-tf-state-archandrew-us-east-1"
-    key            = "${path_relative_to_include()}/terraform.tfstate"
-    region         = local.aws_region
-    encrypt        = true
-    use_lockfile   = true
+    bucket       = "titan-tf-state-archandrew-us-east-1"
+    key          = "${path_relative_to_include()}/terraform.tfstate"
+    region       = local.aws_region
+    encrypt      = true
+    use_lockfile = true
   }
 }
 

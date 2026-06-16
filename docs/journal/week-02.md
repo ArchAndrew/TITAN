@@ -349,3 +349,146 @@ Apply complete. Resources: 6 added, 0 changed, 0 destroyed.
 
 Decision:
 Deferred root-user activity restriction and region restriction until later governance hardening phase to reduce lockout and service-compatibility risk.
+
+----------------------------------------------------------------
+- Implemented AWS Organizations brownfield support
+- Implemented SCP guardrails
+- Implemented Access Analyzer module
+- Resolved Terragrunt backend inheritance issues
+- Resolved AWS Access Analyzer quota conflict
+- Created TITAN account-level Access Analyzer
+
+****************************************************************
+
+## AWS Config Troubleshooting — Terragrunt EOF / Stale Terraform Metadata
+
+### Objective
+
+Deploy the TITAN AWS Config module using Terragrunt-managed remote state.
+
+### Problem
+
+Terragrunt repeatedly failed during initialization with:
+
+```text
+level=error msg=EOF
+Unable to determine underlying exit code
+
+The error occurred after Terragrunt successfully downloaded the module into .terragrunt-cache, but before Terraform produced a useful error message.
+
+## Debugging Commands Used
+
+cat terragrunt.hcl
+cat ../../../root.hcl
+cat ../../../../terraform/modules/aws-config/variables.tf
+cat ../../../../terraform/modules/aws-config/main.tf
+
+tfm
+tfv
+tfp
+
+grep -R "backend \"s3\"" .
+ls -la terraform/modules/aws-config
+ls -la .terragrunt-cache
+
+terragrunt init --terragrunt-no-auto-init --terragrunt-log-level debug
+
+find .terragrunt-cache -name "backend.tf" -o -name "provider.tf" -o -name "versions.tf"
+
+Root Cause
+
+A stale .terraform/ directory existed inside the reusable module source:
+
+terraform/modules/aws-config/.terraform/
+
+Terragrunt copied this stale Terraform metadata into .terragrunt-cache, which caused backend initialization confusion and surfaced as a generic EOF error.
+
+Resolution
+
+1. Removed stale local Terraform metadata from the module source:
+
+rm -rf terraform/modules/aws-config/.terraform
+rm -rf live/dev/us-east-1/aws-config/.terragrunt-cache
+
+2. Then reinitialized through Terragrunt:
+
+cd live/dev/us-east-1/aws-config
+tgi
+tgv
+tgp
+
+3. Backend Modernization
+
+Also migrated the Terragrunt backend configuration from deprecated DynamoDB locking to native S3 lockfile support.
+
+Old:
+
+dynamodb_table = "titan-terraform-locks"
+
+New:
+
+use_lockfile = true
+
+Result
+
+Terragrunt initialized successfully, AWS Config validated successfully, and Terraform generated a clean plan:
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+### Lesson Learned
+
+Reusable Terraform modules should not contain local .terraform/ directories. Terragrunt copies module source files into .terragrunt-cache, so stale local Terraform metadata can poison Terragrunt execution.
+
+Terraform/Terragrunt troubleshooting should isolate:
+
+Module validity
+Live Terragrunt configuration
+Root inheritance
+Backend generation
+Cache contents
+Stale local metadata
+
+
+Take away:
+
+I debugged a Terragrunt EOF failure by isolating the module, inspecting generated cache contents, validating backend generation, and discovering stale `.terraform` metadata contaminating the Terragrunt cache.
+
+****************************************************************
+
+2026-06-16 — AWS Config + Security Hub Deployment
+
+Time Spent: ~5.5 hours
+
+Objective:
+Implement governance and security foundations for TITAN Enterprise Self-Service Platform.
+
+Completed
+
+Fixed Terragrunt initialization failures
+Corrected backend state configuration
+Removed deprecated DynamoDB locking
+Migrated to S3 native state locking
+Debugged Terragrunt EOF errors
+Identified empty provider.tf issue
+Deployed AWS Config
+Config Recorder operational
+Delivery Channel operational
+Recording Status: SUCCESS
+Deployed AWS Security Hub
+Default standards enabled
+Git repository updated
+
+Lessons Learned
+
+Terragrunt EOF errors may originate from malformed or empty generated files.
+Debugging with:
+
+terragrunt init --terragrunt-log-level debug
+
+is significantly more useful than standard output.
+S3 native locking simplifies backend management versus DynamoDB.
+State management mistakes are recoverable when infrastructure is modularized.
+Always validate generated files inside .terragrunt-cache.
+
+*Take away:
+During development of TITAN, I encountered a backend initialization issue that blocked deployment. Rather than rebuilding from scratch, I traced the failure through Terragrunt debug logs, inspected generated cache artifacts, identified an empty provider configuration, migrated backend locking to native S3, and restored deployment capability. The experience reinforced the importance of understanding Terraform internals rather than treating IaC as a black box.
