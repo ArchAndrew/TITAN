@@ -19,7 +19,7 @@ TITAN is designed to embed governance, security, auditability, and risk manageme
 | IR | Incident Response | Alerting, Security Hub, GuardDuty, runbooks |
 | RA | Risk Assessment | Security scans, AI risk register, governance checks |
 | SC | System & Communications Protection | KMS, TLS, network policies, private subnets |
-| SI | System & Information Integrity | Vulnerability scanning, drift detection, policy checks |
+| SI | System & Information Integrity | Vulnerability scanning, drift detection, policy checks | 
 
 ---
 

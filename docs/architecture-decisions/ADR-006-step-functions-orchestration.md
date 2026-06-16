@@ -1,4 +1,4 @@
-ADR-006: Use AWS Step Functions for Workflow Orchestration
+# ADR-006: Use AWS Step Functions for Workflow Orchestration
 Status
 
 Accepted
