@@ -521,3 +521,599 @@ Observed:
 Outcome:
 Security findings can now flow into Security Hub for centralized visibility.
 
+----------------------------------------------------
+
+# Journal Entry – TITAN Enterprise Self-Service Platform
+
+**Date:** 2026-06-16  
+**Session Duration:** ~8:30 PM – 10:30 PM (Current Session)  
+**Environment:** dev / us-east-1  
+**Project:** TITAN Enterprise Self-Service Platform  
+**Focus Areas:** KMS Encryption Platform, Validation, Governance Stack Expansion
+
+---
+
+## Objective
+
+Implement a customer-managed AWS KMS encryption capability for TITAN to support:
+
+- Encryption of platform security artifacts
+- Future CloudTrail log encryption
+- Future Secrets Manager integration
+- Governance and compliance controls
+- NIST 800-53 aligned security architecture
+
+---
+
+## Architecture Position
+
+```text
+AWS Organizations
+├── SCP Guardrails
+├── IAM Access Analyzer
+├── AWS Config
+├── Security Hub
+├── GuardDuty
+└── KMS
+```
+
+---
+
+## Resources Created
+
+### Terraform Module
+
+```text
+terraform/modules/kms
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── versions.tf
+└── README.md
+```
+
+### Terragrunt Deployment
+
+```text
+live/dev/us-east-1/kms
+└── terragrunt.hcl
+```
+
+---
+
+## Terraform Resources
+
+### KMS Key
+
+```hcl
+resource "aws_kms_key" "this"
+```
+
+Capabilities:
+
+- Customer Managed Key (CMK)
+- Automatic Key Rotation
+- Encryption / Decryption
+- Tagged for Governance
+
+### KMS Alias
+
+```hcl
+resource "aws_kms_alias" "this"
+```
+
+Alias:
+
+```text
+alias/titan-security
+```
+
+---
+
+## Validation Results
+
+### Terraform
+
+```bash
+tgi
+tgv
+tgp
+tga
+```
+
+Result:
+
+```text
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+```
+
+---
+
+### Alias Verification
+
+Command:
+
+```bash
+aws kms list-aliases \
+  --query "Aliases[?AliasName=='alias/titan-security']"
+```
+
+Result:
+
+```text
+alias/titan-security
+```
+
+Status:
+
+✅ Passed
+
+---
+
+### Key Verification
+
+Command:
+
+```bash
+aws kms describe-key \
+  --key-id alias/titan-security
+```
+
+Important Validation Results:
+
+```json
+{
+  "Enabled": true,
+  "KeyManager": "CUSTOMER",
+  "KeyUsage": "ENCRYPT_DECRYPT",
+  "KeySpec": "SYMMETRIC_DEFAULT"
+}
+```
+
+Status:
+
+✅ Passed
+
+---
+
+## Security Outcome
+
+Successfully deployed a customer-managed encryption layer that can be leveraged by:
+
+- CloudTrail
+- AWS Config
+- Security Hub exports
+- Future Secrets Manager integrations
+- Future platform artifacts and evidence repositories
+
+This establishes foundational encryption capabilities for the TITAN governance and security architecture.
+
+---
+
+## Interview Talking Points
+
+### Platform Security
+
+Implemented customer-managed encryption using AWS KMS with Terraform and Terragrunt. Configured automated key rotation and governance tagging standards to support enterprise security requirements and future encryption of platform services.
+
+### Governance
+
+Integrated KMS into a broader cloud governance architecture consisting of:
+
+- AWS Organizations
+- Service Control Policies
+- IAM Access Analyzer
+- AWS Config
+- Security Hub
+- GuardDuty
+
+### Compliance
+
+Supports:
+
+- NIST 800-53
+- Security logging
+- Evidence retention
+- Encryption-at-rest controls
+- Governance guardrails
+
+---
+
+## Current Security Stack
+
+### Governance
+
+- AWS Organizations
+- SCP Guardrails
+- IAM Access Analyzer
+- AWS Config
+
+### Threat Detection
+
+- Security Hub
+- GuardDuty
+  - CloudTrail Monitoring
+  - DNS Monitoring
+  - VPC Flow Log Monitoring
+  - S3 Data Event Monitoring
+  - EKS Audit Log Monitoring
+  - Malware Protection
+
+### Encryption
+
+- AWS KMS
+  - Customer Managed Key
+  - Alias Management
+  - Key Rotation Enabled
+
+---
+
+## Next Planned Module
+
+### CloudTrail
+
+Reason:
+
+```text
+CloudTrail
+    ↓
+AWS Config
+    ↓
+GuardDuty
+    ↓
+Security Hub
+```
+
+CloudTrail will provide the audit and activity telemetry required to complete the core governance and threat-detection pipeline.
+
+Target Deliverables:
+
+- Organization Trail
+- Multi-Region Logging
+- Log File Validation
+- KMS Encryption Integration
+- S3 Log Storage
+- Security Hub Integration
+
+---
+
+## Session Outcome
+
+### Completed
+
+✅ AWS KMS Module Created  
+✅ Terragrunt Deployment Created  
+✅ Terraform Validation Passed  
+✅ Deployment Successful  
+✅ Alias Verification Successful  
+✅ Customer Managed Key Verified  
+✅ Governance Tags Applied  
+✅ Encryption Layer Added To TITAN Security Platform
+
+**Status:** COMPLETE
+
+*****************************************************
+# TITAN Journal – CloudTrail + KMS Integration & Troubleshooting
+
+**Date:** 2026-06-16
+**Duration:** ~1.5 hours
+**Module(s):**
+- kms
+- cloudtrail
+
+---
+
+## Objective
+
+Implement centralized audit logging with AWS CloudTrail and encrypt audit logs using a customer-managed AWS KMS key.
+
+---
+
+## Resources Created
+
+### KMS
+
+- Customer Managed Key (CMK)
+- Alias: `alias/titan-security`
+- Key Rotation Enabled
+- Tagged according to TITAN governance standards
+
+Terraform Resources:
+
+```hcl
+aws_kms_key.this
+aws_kms_alias.this
+```
+
+Validation:
+
+```bash
+aws kms list-aliases \
+  --query "Aliases[?AliasName=='alias/titan-security']"
+
+aws kms describe-key \
+  --key-id alias/titan-security
+```
+
+Status:
+
+- Key Enabled
+- Key Manager: CUSTOMER
+- Symmetric Encryption
+- Alias Created Successfully
+
+---
+
+## CloudTrail Implementation
+
+Created:
+
+- Dedicated CloudTrail S3 bucket
+- Bucket Policy
+- Public Access Block
+- Multi-Region CloudTrail
+- Log File Validation Enabled
+- KMS Encryption Enabled
+
+Terraform Resources:
+
+```hcl
+aws_s3_bucket.trail
+aws_s3_bucket_policy.trail
+aws_s3_bucket_public_access_block.trail
+aws_cloudtrail.this
+```
+
+---
+
+## Issue #1
+
+### Invalid KMS Key Identifier
+
+Initial Error:
+
+```text
+kms_key_id (alias/titan-security) is an invalid ARN
+```
+
+Root Cause:
+
+CloudTrail requires a KMS Key ARN.
+
+Terraform was passing:
+
+```hcl
+alias/titan-security
+```
+
+instead of:
+
+```hcl
+arn:aws:kms:...
+```
+
+Resolution:
+
+Updated module output:
+
+```hcl
+output "key_arn" {
+  value = aws_kms_key.this.arn
+}
+```
+
+Updated Terragrunt dependency reference:
+
+```hcl
+kms_key_id = dependency.kms.outputs.key_arn
+```
+
+Result:
+
+CloudTrail plan succeeded.
+
+---
+
+## Issue #2
+
+### CloudTrail Creation Failed
+
+Error:
+
+```text
+InsufficientEncryptionPolicyException
+```
+
+CloudTrail reported:
+
+- Unable to access S3 bucket
+- Unable to access KMS key
+
+---
+
+## Root Cause Analysis
+
+Terraform syntax was valid.
+
+Issue was AWS authorization.
+
+CloudTrail requires explicit permissions in the KMS Key Policy.
+
+The CMK policy only granted permissions to the account root principal.
+
+CloudTrail service principal was not authorized.
+
+---
+
+## Resolution
+
+Added CloudTrail service permissions:
+
+```json
+{
+  "Sid": "AllowCloudTrailToEncryptLogs",
+  "Effect": "Allow",
+  "Principal": {
+    "Service": "cloudtrail.amazonaws.com"
+  },
+  "Action": [
+    "kms:GenerateDataKey*",
+    "kms:DescribeKey"
+  ],
+  "Resource": "*"
+}
+```
+
+Re-applied KMS:
+
+```bash
+cd live/dev/us-east-1/kms
+
+tgp
+tga
+```
+
+Re-applied CloudTrail:
+
+```bash
+cd ../cloudtrail
+
+tgp
+tga
+```
+
+Result:
+
+```text
+Apply complete!
+Resources: 1 added
+```
+
+CloudTrail created successfully.
+
+---
+
+## Validation
+
+Verified CloudTrail:
+
+```bash
+aws cloudtrail describe-trails
+```
+
+Verified KMS:
+
+```bash
+aws kms describe-key \
+  --key-id alias/titan-security
+```
+
+Verified encryption integration:
+
+```bash
+aws cloudtrail get-trail-status \
+  --name titan-cloudtrail
+```
+
+Status:
+
+- CloudTrail Enabled
+- Multi-Region
+- Log Validation Enabled
+- S3 Logging Enabled
+- KMS Encryption Enabled
+
+---
+
+## Lessons Learned
+
+1. CloudTrail requires KMS Key ARN, not alias.
+2. Successful Terraform validation does not guarantee AWS authorization success.
+3. KMS key policies are frequently the root cause of service integration failures.
+4. CloudTrail + KMS integrations require explicit service-principal permissions.
+5. Reading AWS service error messages carefully is often faster than blindly modifying Terraform.
+
+---
+
+## Interview Talking Point
+
+Implemented enterprise audit logging using Terraform and Terragrunt.
+
+Designed and deployed:
+
+- AWS Config
+- Security Hub
+- GuardDuty
+- Customer Managed KMS Encryption
+- Multi-Region CloudTrail
+
+Troubleshot KMS authorization failures by analyzing CloudTrail encryption errors, updating CMK policies, and validating service-principal permissions.
+
+Outcome:
+
+- Centralized audit logging
+- Customer-managed encryption
+- Governance-aligned security baseline
+- Infrastructure fully codified through Terraform/Terragrunt
+
+***************************************************
+
+# Security Hub Standards Implementation
+
+## Objective
+
+Extend Security Hub beyond default enablement by subscribing to enterprise security frameworks.
+
+## Standards Enabled
+
+- AWS Foundational Security Best Practices v1.0.0
+- CIS AWS Foundations Benchmark v1.2.0
+
+## Issue Encountered
+
+Terraform failed when enabling CIS benchmark.
+
+Error:
+
+Invalid StandardsSubscriptionRequest
+
+## Root Cause
+
+Incorrect ARN format.
+
+Used:
+
+arn:aws:securityhub:us-east-1::standards/cis-aws-foundations-benchmark/v/1.2.0
+
+Correct:
+
+arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0
+
+## Resolution
+
+Queried available standards:
+
+aws securityhub describe-standards
+
+Discovered CIS benchmark uses a ruleset ARN instead of a standards ARN.
+
+Updated Terraform and redeployed successfully.
+
+## Validation
+
+aws securityhub get-enabled-standards
+
+Confirmed:
+
+- AWS Foundational Security Best Practices
+- CIS AWS Foundations Benchmark
+
+## Outcome
+
+Security posture baseline now includes:
+
+- Governance
+- Compliance
+- Continuous Security Monitoring
+- CIS Benchmark Alignment
+

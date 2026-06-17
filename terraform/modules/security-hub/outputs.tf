@@ -5,3 +5,11 @@ output "security_hub_enabled" {
 output "default_standards_enabled" {
   value = var.enable_default_standards
 }
+
+output "foundational_enabled" {
+  value = true
+}
+
+output "cis_enabled" {
+  value = true
+}
