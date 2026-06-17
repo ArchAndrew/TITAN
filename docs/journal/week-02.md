@@ -492,3 +492,32 @@ Always validate generated files inside .terragrunt-cache.
 
 *Take away:
 During development of TITAN, I encountered a backend initialization issue that blocked deployment. Rather than rebuilding from scratch, I traced the failure through Terragrunt debug logs, inspected generated cache artifacts, identified an empty provider configuration, migrated backend locking to native S3, and restored deployment capability. The experience reinforced the importance of understanding Terraform internals rather than treating IaC as a black box.
+
+----------------------------------------------
+
+## 2026-06-17
+
+### GuardDuty Deployment
+
+Implemented GuardDuty module.
+
+Features Enabled:
+- CloudTrail Monitoring
+- DNS Log Analysis
+- VPC Flow Log Analysis
+- S3 Data Event Monitoring
+- EKS Audit Log Monitoring
+
+Verification:
+aws guardduty get-detector
+
+Status: ENABLED
+
+Observed:
+- S3 Protection enabled
+- Kubernetes Audit Log monitoring enabled
+- Malware Protection enabled
+
+Outcome:
+Security findings can now flow into Security Hub for centralized visibility.
+
