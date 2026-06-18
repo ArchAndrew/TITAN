@@ -46,3 +46,20 @@ Notification
 That's orchestration.. Step Functions were literally built for this.
 
 -----------------------------------------------
+
+ADR-006 Security Findings Prioritization Strategy
+
+Security Hub serves as TITAN's centralized findings repository.
+
+Custom Security Hub Insights are used to aggregate and prioritize
+security findings for executive reporting and operational triage.
+
+Insights focus on:
+
+- Critical Findings
+- High Findings
+- IAM Risks
+- Encryption Risks
+- Public Exposure Risks
+- S3 Risks
+

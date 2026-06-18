@@ -1400,3 +1400,320 @@ GuardDuty
 KMS
 
 TITAN is transitioning from infrastructure deployment into a true cloud governance and security platform.
+
+-------------------------------------------------------
+
+# Journal Entry 014 – Security Hub Insights
+
+**Date:** 2026-06-17
+
+## Objective
+
+Implement custom AWS Security Hub Insights to provide prioritized visibility into critical and high-severity security findings within the TITAN platform.
+
+---
+
+## Work Completed
+
+### Security Hub Insights Module
+
+Created:
+
+```text
+terraform/modules/security-hub-insights
+```
+
+Implemented:
+
+- TITAN Critical Findings Insight
+- TITAN High Findings Insight
+
+---
+
+### Insight Configuration
+
+#### Critical Insight
+
+```text
+SeverityLabel = CRITICAL
+GroupBy = ResourceId
+```
+
+#### High Insight
+
+```text
+SeverityLabel = HIGH
+GroupBy = ResourceId
+```
+
+---
+
+## Validation
+
+### Module Validation
+
+```bash
+tfm
+```
+
+Result:
+
+```text
+Success! The configuration is valid.
+```
+
+---
+
+### Terragrunt Plan
+
+```bash
+tgp
+```
+
+Result:
+
+```text
+Plan: 2 to add, 0 to change, 0 to destroy
+```
+
+---
+
+### Deployment
+
+```bash
+tga
+```
+
+Result:
+
+```text
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+```
+
+---
+
+### CLI Verification
+
+```bash
+aws securityhub get-insights
+```
+
+Confirmed:
+
+```text
+TITAN Critical Findings
+TITAN High Findings
+```
+
+---
+
+## Architectural Value
+
+The Security Hub Insights layer provides:
+
+- Prioritized security triage
+- Executive reporting support
+- Operational visibility into critical findings
+- Centralized security reporting within TITAN
+- Enhanced Security Hub usability through custom filtering and grouping
+
+---
+
+## Components Implemented To Date
+
+### Foundation
+
+- Terraform
+- Terragrunt
+- Remote State (S3)
+- AWS Organizations
+
+### Security Services
+
+- AWS KMS
+- AWS CloudTrail
+- AWS Config
+- AWS Config Rules
+- IAM Access Analyzer
+- AWS Security Hub
+- AWS Foundational Security Best Practices (FSBP)
+- CIS AWS Foundations Benchmark
+- Amazon GuardDuty
+- GuardDuty Malware Protection
+- GuardDuty S3 Protection
+- Security Hub Insights
+
+---
+
+## Outcome
+
+Successfully deployed and validated custom Security Hub Insights, extending TITAN from a governance and compliance platform into a security operations reporting platform.
+
+Security Hub now includes:
+
+- AWS Foundational Security Best Practices
+- CIS AWS Foundations Benchmark
+- TITAN Critical Findings Insight
+- TITAN High Findings Insight
+
+This milestone establishes a dedicated security reporting layer capable of supporting both operational triage and executive-level security visibility.
+
+---
+
+## Next Steps
+
+- Git commit and push Security Hub Insights implementation
+- Evaluate Security Hub Custom Actions
+- Evaluate AWS Config Conformance Packs
+- Expand governance and compliance reporting capabilities
+- Continue building toward TITAN v1 cloud governance platform
+
+-----------------------------------------------------
+
+# Journal Entry – TITAN Conformance Pack Deployment
+
+**Date:** 2026-06-18
+**Project:** TITAN Enterprise Self-Service Platform
+**Component:** AWS Config Conformance Pack
+
+---
+
+## Objective
+
+Deploy an AWS Config Conformance Pack to establish a reusable governance baseline across the TITAN platform.
+
+The goal was to move beyond individual Config Rules and create a compliance framework capable of detecting configuration drift and measuring overall platform compliance posture.
+
+---
+
+## Work Completed
+
+### Created New Module
+
+Location:
+
+terraform/modules/conformance-pack
+
+Files:
+
+- versions.tf
+- variables.tf
+- main.tf
+- outputs.tf
+- titan-security-baseline.yaml
+- README.md
+
+---
+
+### Created Terragrunt Deployment
+
+Location:
+
+live/dev/us-east-1/conformance-pack
+
+Files:
+
+- terragrunt.hcl
+
+---
+
+### Implemented TITAN Security Baseline
+
+The Conformance Pack includes the following AWS Config managed rules:
+
+- S3_BUCKET_PUBLIC_READ_PROHIBITED
+- S3_BUCKET_PUBLIC_WRITE_PROHIBITED
+- ENCRYPTED_VOLUMES
+- ROOT_ACCOUNT_MFA_ENABLED
+- CLOUD_TRAIL_ENABLED
+- IAM_PASSWORD_POLICY
+
+---
+
+## Design Decision
+
+The Conformance Pack definition was implemented using YAML instead of HCL.
+
+Reasoning:
+
+- AWS Config Conformance Packs natively consume CloudFormation-style YAML templates.
+- Aligns with AWS documentation and examples.
+- Easier for auditors and security teams to review.
+- Improves maintainability as rule count grows.
+- Demonstrates use of AWS-native governance artifacts while Terraform acts as the orchestration layer.
+
+Architecture:
+
+Terraform
+→ Terragrunt
+→ AWS Config Conformance Pack
+→ YAML Template
+→ Managed Config Rules
+
+---
+
+## Validation
+
+Terraform module validation:
+
+Success
+
+Terragrunt initialization:
+
+Success
+
+Terraform plan:
+
+Success
+
+Terraform apply:
+
+Success
+
+Outputs:
+
+- conformance_pack_name = titan-security-baseline
+- conformance_pack_arn generated successfully
+
+---
+
+## Outcome
+
+Successfully deployed a reusable AWS Config Conformance Pack representing the TITAN Security Baseline.
+
+The platform now supports:
+
+- Preventive controls (SCPs)
+- Detective controls (GuardDuty, Security Hub)
+- Governance controls (AWS Config Rules)
+- Compliance frameworks (Conformance Packs)
+
+This significantly improves TITAN's ability to detect configuration drift and report compliance posture at scale.
+
+---
+
+## Current TITAN Security Stack
+
+- AWS Organizations
+- Service Control Policies (SCPs)
+- Budget Guardrails
+- KMS
+- CloudTrail
+- AWS Config
+- AWS Config Rules
+- AWS Config Conformance Pack
+- GuardDuty
+- Malware Protection
+- S3 Protection
+- Security Hub
+- Security Hub Insights
+
+---
+
+## Next Steps
+
+- Create Security Hub executive dashboards
+- Add additional Security Hub Insights
+- Expand governance reporting
+- Introduce compliance-focused executive metrics
+- Continue alignment with NIST 800-53 and NIST AI RMF controls
