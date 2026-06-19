@@ -1717,3 +1717,22 @@ This significantly improves TITAN's ability to detect configuration drift and re
 - Expand governance reporting
 - Introduce compliance-focused executive metrics
 - Continue alignment with NIST 800-53 and NIST AI RMF controls
+
+----------------------------------------------------------------
+
+## Security Hub Validation
+
+Verified Security Hub operational state through AWS CLI after console displayed new Security Hub onboarding experience.
+
+Validation Commands:
+- aws securityhub describe-hub
+- aws securityhub get-insights
+
+Results:
+- Confirmed Security Hub subscription active
+- Confirmed custom TITAN Security Hub Insights deployed
+- Confirmed automation rules successfully created
+- Determined console onboarding page was unrelated to Terraform deployment status
+
+Lesson Learned:
+Always trust service APIs and Terraform state over console assumptions when validating cloud deployments.
