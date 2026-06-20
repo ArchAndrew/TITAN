@@ -1736,3 +1736,123 @@ Results:
 
 Lesson Learned:
 Always trust service APIs and Terraform state over console assumptions when validating cloud deployments.
+
+--------------------------------------------------------------------
+
+## Journal Entry – Security Hub Custom Actions Deployment
+
+### Objective
+
+Deploy custom Security Hub action targets to support future TITAN incident response workflows.
+
+### Implementation
+
+Created three Security Hub custom actions:
+
+- TITANInvestigate
+- TITANEscalate
+- TITANSuppress
+
+These actions allow analysts to initiate workflow-driven responses directly from Security Hub findings.
+
+### Initial Issues
+
+Terraform validation failed due to Security Hub naming constraints.
+
+Errors included:
+
+- Name exceeded maximum length
+- Identifier exceeded maximum length
+- Identifier contained unsupported characters
+
+### Resolution
+
+Updated action target definitions to meet Security Hub requirements:
+
+- Maximum 20 characters
+- Alphanumeric characters only
+
+Final values:
+
+- TITANInvestigate
+- TITANEscalate
+- TITANSuppress
+
+### Validation
+
+Terraform validation successful.
+
+Terragrunt plan successful.
+
+Terraform apply successful.
+
+Verified deployment using:
+
+```bash
+aws securityhub describe-action-targets
+
+
+--------------------------------------------------------------------
+
+## Journal Entry – EventBridge Security Hub Action Router
+
+### Objective
+
+Create an event-driven workflow layer for TITAN by routing Security Hub custom action events through EventBridge.
+
+### Implementation
+
+Created:
+
+- CloudWatch Log Group
+- EventBridge Rule
+- EventBridge Target
+- CloudWatch Log Resource Policy
+
+Rule Name:
+
+titan-securityhub-custom-actions
+
+Log Group:
+
+/aws/events/titan/securityhub/custom-actions
+
+### Event Pattern
+
+Source:
+
+aws.securityhub
+
+Detail Type:
+
+Security Hub Findings - Custom Action
+
+### Validation
+
+Terraform validation successful.
+
+Terragrunt plan successful.
+
+Terraform apply successful.
+
+Validated deployment using:
+
+aws events list-rules
+
+Confirmed EventBridge rule:
+
+titan-securityhub-custom-actions
+
+Status:
+
+ENABLED
+
+Confirmed event pattern correctly captures Security Hub custom action events.
+
+### Outcome
+
+TITAN now supports event-driven security workflows.
+
+Security Hub custom actions can generate events that are routed through EventBridge and captured in CloudWatch Logs.
+
+This establishes the foundation for future automated investigation, escalation, enrichment, notification, and remediation workflows using Lambda and Step Functions.
