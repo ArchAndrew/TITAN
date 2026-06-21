@@ -16,6 +16,7 @@ inputs = {
   function_name      = "titan-securityhub-investigator"
   event_rule_name    = "titan-securityhub-custom-actions"
   log_retention_days = 30
+  sns_topic_arn = "arn:aws:sns:us-east-1:144618662969:titan-security-alerts"
 
   tags = {
     Project            = "TITAN"
@@ -27,5 +28,6 @@ inputs = {
     DataClassification = "internal"
     ComplianceScope    = "nist-800-53"
     ManagedBy          = "terragrunt"
+
   }
 }
