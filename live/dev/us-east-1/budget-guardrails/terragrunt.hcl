@@ -9,7 +9,10 @@ terraform {
 inputs = {
   budget_name        = "titan-dev-budget"
   monthly_limit      = 50
-  notification_email = "andrew@strongtowersecurity.io"
+  notification_email = get_env(
+  "TITAN_NOTIFICATION_EMAIL",
+  "placeholder@example.com"
+)
 
   tags = {
     Project            = "TITAN"
