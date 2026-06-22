@@ -1,0 +1,33 @@
+{
+  "detail": {
+    "actionName": "TITANInvestigate",
+    "actionDescription": "Security Hub investigation workflow",
+    "findings": [
+      {
+        "Id": "finding-001",
+        "GeneratorId": "securityhub",
+        "AwsAccountId": "144618662969",
+        "Region": "us-east-1",
+        "Title": "IAM User Has AdministratorAccess",
+        "Description": "User possesses excessive privileges.",
+        "RecordState": "ACTIVE",
+        "Workflow": {
+          "Status": "NEW"
+        },
+        "Compliance": {
+          "Status": "FAILED"
+        },
+        "Severity": {
+          "Label": "HIGH"
+        },
+        "Resources": [
+          {
+            "Id": "john.doe",
+            "Type": "AwsIamUser",
+            "Region": "us-east-1"
+          }
+        ]
+      }
+    ]
+  }
+}

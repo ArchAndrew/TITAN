@@ -1856,3 +1856,27 @@ TITAN now supports event-driven security workflows.
 Security Hub custom actions can generate events that are routed through EventBridge and captured in CloudWatch Logs.
 
 This establishes the foundation for future automated investigation, escalation, enrichment, notification, and remediation workflows using Lambda and Step Functions.
+
+----------------------------------------------------------------------------------
+
+Week XX
+
+Completed:
+- Security Hub custom actions
+- EventBridge integration
+- Investigation Lambda deployment
+- SNS notification integration
+
+Validated:
+Security Hub → Custom Action → EventBridge → Lambda → SNS
+
+Issues Resolved:
+- Terraform brace nesting
+- Security Hub action identifier constraints
+- Lambda packaging path issues
+- Terragrunt variable propagation issue (sns_topic_arn inside tags block)
+
+Next:
+- Implement SNS publish logic in handler.py
+- Add Slack/PagerDuty/ServiceNow integration path
+- Add finding enrichment and severity routing
