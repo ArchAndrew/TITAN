@@ -146,3 +146,16 @@ returned no repository matches.
 ## Lessons Learned
 
 When using Terragrunt-generated remote state, reusable Terraform modules should never define their own backend blocks. Backend ownership should exist in exactly one location to prevent initialization conflicts and configuration drift.
+
+---------------------------------------------------
+
+2026-06-23
+Security Hub Investigation Workflow Validation
+
+Key lessons:
+
+SNS email subscriptions require confirmation.
+Terragrunt-generated backends conflict with module-defined backends.
+Backend blocks belong in Terragrunt-managed infrastructure, not Terraform modules.
+Sensitive values moved from hardcoded inputs to environment-variable driven configuration.
+End-to-end validation completed from Security Hub event → Lambda → SNS → Email.
