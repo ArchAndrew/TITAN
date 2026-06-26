@@ -22,3 +22,62 @@ module "security_hub_insights" {
     Project = "TITAN"
   }
 }
+
+----------------------------------------
+
+# TITAN Executive Security Insights
+
+## Purpose
+
+Provide executive-level visibility into security risk,
+compliance posture, and active remediation priorities.
+
+## Insights
+
+### TITAN Critical Findings
+
+Business Value:
+Identifies the highest-risk findings requiring immediate action.
+
+Executive Question Answered:
+"What can hurt us today?"
+
+---
+
+### TITAN Failed Compliance Findings
+
+Business Value:
+Highlights control failures impacting compliance posture.
+
+Executive Question Answered:
+"Where are we failing policy requirements?"
+
+---
+
+### TITAN IAM Risk Findings
+
+Business Value:
+Identifies excessive permissions and identity exposure.
+
+Executive Question Answered:
+"Who has more access than they should?"
+
+---
+
+### TITAN S3 Exposure Findings
+
+Business Value:
+Highlights exposed storage resources.
+
+Executive Question Answered:
+"Is company data publicly exposed?"
+
+---
+
+### TITAN New Active Findings
+
+Business Value:
+Tracks incoming unresolved risk.
+
+Executive Question Answered:
+"What is the current workload facing security operations?"

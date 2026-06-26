@@ -3,28 +3,20 @@ include "root" {
 }
 
 terraform {
-  source = "../../../../terraform/modules/eks"
-}
-
-dependency "vpc" {
-  config_path = "../vpc"
+  source = "../../../../terraform/modules/observability"
 }
 
 inputs = {
-  cluster_name = "titan-dev"
 
-  subnet_ids = dependency.vpc.outputs.private_subnet_ids
+  environment = "dev"
 
-  node_instance_types = ["t3.small"]
-
-  desired_size = 3
-  min_size     = 2
-  max_size     = 5
+  sns_topic_arn = "arn:aws:sns:us-east-1:144618662969:titan-security-alerts"
 
   tags = {
+
     Project          = "TITAN"
     Environment      = "dev"
-    Application      = "eks"
+    Application      = "observability"
     BusinessOwner    = "platform-engineering"
     TechnicalOwner   = "cloud-platform"
     ComplianceScope  = "nist-800-53"
