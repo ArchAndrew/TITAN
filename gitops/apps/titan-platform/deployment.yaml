@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titan-platform
+  namespace: titan-platform
+  labels:
+    app: titan-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: titan-platform
+  template:
+    metadata:
+      labels:
+        app: titan-platform
+    spec:
+      containers:
+        - name: titan-platform
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
