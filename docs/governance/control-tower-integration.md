@@ -67,3 +67,53 @@ TITAN v2 will introduce an Account Factory for Terraform workflow:
 - Terraform customization pipeline
 - Cost center and tag enforcement
 - Integration with the TITAN platform API
+
+----------------------------------------------------------------------
+
+# AWS Control Tower Integration
+
+TITAN is designed as a Control Tower-compatible internal developer platform.
+
+## Enterprise Pattern
+
+AWS Control Tower provides:
+- Landing zone governance
+- Account enrollment
+- Organizational Unit baselines
+- Preventive controls
+- Detective controls
+- Centralized logging
+- Account Factory
+
+TITAN extends this with:
+- Terraform/Terragrunt customization
+- GitOps platform deployment
+- Observability
+- Cost guardrails
+- Policy-as-code
+- Self-service workflows
+
+## Control Tower Mapping
+
+| Control Tower Capability | TITAN Implementation |
+|---|---|
+| Landing Zone | Terraform/Terragrunt AWS foundation |
+| Account Factory | Future self-service account vending |
+| Preventive Controls | SCP modules |
+| Detective Controls | AWS Config, Security Hub, GuardDuty |
+| Central Logging | CloudTrail, S3 logging, Loki |
+| Identity | IAM Identity Center design |
+| Baselines | Terraform account baseline modules |
+| Governance Reporting | Grafana, Security Hub, Config |
+
+## Future v2 Enhancement
+
+TITAN will introduce Account Factory for Terraform integration to support:
+
+- Account request workflow
+- OU placement
+- Baseline module execution
+- Cost-center tagging
+- Approval workflow
+- Security account enrollment
+- Observability registration
