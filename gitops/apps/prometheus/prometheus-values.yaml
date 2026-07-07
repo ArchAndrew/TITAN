@@ -1,0 +1,10 @@
+alertmanager:
+  persistence:
+    storageClass: gp3
+
+server:
+  persistentVolume:
+    storageClass: gp3
+
+  remoteWrite:
+    - url: http://mimir-nginx.monitoring.svc:80/api/v1/push

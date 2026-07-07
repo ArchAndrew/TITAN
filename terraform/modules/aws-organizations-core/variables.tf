@@ -14,3 +14,12 @@ variable "service_access_principals" {
     "sso.amazonaws.com"
   ]
 }
+
+variable "member_accounts" {
+  description = "AWS Organization member accounts managed by TITAN."
+  type = map(object({
+    email = string
+    name  = string
+  }))
+  default = {}
+}

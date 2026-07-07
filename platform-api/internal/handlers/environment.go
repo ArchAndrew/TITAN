@@ -3,15 +3,10 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-)
 
-type EnvironmentRequest struct {
-	ProjectName string `json:"project_name"`
-	Environment string `json:"environment"`
-	Owner       string `json:"owner"`
-	CostCenter  string `json:"cost_center"`
-	Region      string `json:"region"`
-}
+	"github.com/ArchAndrew/Self-Service-Platform/platform-api/internal/models"
+	"github.com/ArchAndrew/Self-Service-Platform/platform-api/internal/workflow"
+)
 
 func CreateEnvironmentRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -19,18 +14,14 @@ func CreateEnvironmentRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req EnvironmentRequest
-
+	var req models.EnvironmentRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "invalid request", http.StatusBadRequest)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	response := workflow.ProcessEnvironmentRequest(req)
 
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"status": "accepted",
-		"request": req,
-		"nextStep": "Trigger Terraform Workflow",
-	})
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }

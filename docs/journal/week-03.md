@@ -761,7 +761,624 @@ Current platform capabilities:
 
 > **Milestone Achieved:** TITAN has officially evolved beyond an Infrastructure-as-Code project into an **enterprise platform engineering environment**. The platform now includes infrastructure provisioning, Kubernetes orchestration, observability, monitoring, and GitOps capabilities, closely reflecting the architecture of a modern Internal Developer Platform (IDP).
 
+***-------------------------------------------------------------***
+
+# TITAN Engineering Journal
+
+## Week 04 – GitOps Expansion, ArgoCD Scaling, OPA Preparation & Cluster Autoscaler
+
+**Date:** June 27, 2026
+
 ---
 
+## Objective
+
+Continue evolving TITAN from an infrastructure provisioning project into an enterprise Internal Developer Platform (IDP) by expanding GitOps capabilities, implementing ArgoCD application management, beginning policy enforcement with OPA Gatekeeper, and preparing the Kubernetes platform for automatic node scaling.
+
+---
+
+# Resources Created
+
+### GitOps
+
+* Implemented GitHub authentication for a private repository using a GitHub Fine-Grained Personal Access Token (PAT).
+* Stored GitHub credentials securely as a Kubernetes Secret rather than embedding credentials into manifests.
+* Configured ArgoCD repository authentication against the private GitHub repository.
+* Verified automatic synchronization from GitHub to the Kubernetes cluster.
+
+---
+
+### ArgoCD
+
+Created and validated:
+
+* AppProject
+* Application
+* ApplicationSet
+
+Verified:
+
+* Automatic Sync
+* Self Healing
+* Namespace Auto-Creation
+* Repository synchronization
+* Successful deployment of TITAN application
+
+The platform is now capable of managing future platform applications declaratively without manually creating individual ArgoCD Application resources.
+
+---
+
+### Kubernetes
+
+Successfully deployed:
+
+* TITAN application namespace
+* ReplicaSet
+* Running application pods
+* ArgoCD GitOps workflow
+
+Verified cluster health through:
+
+* kubectl
+* ArgoCD UI
+* Kubernetes events
+* Pod status
+
+---
+
+### OPA Gatekeeper
+
+Completed initial deployment work:
+
+* Added official Gatekeeper Helm repository
+* Updated Helm repositories
+* Installed Gatekeeper controllers
+* Verified controller deployment
+* Verified Gatekeeper Audit controller
+
+Prepared environment for:
+
+* Constraint Templates
+* Admission Control
+* Policy Library
+
+---
+
+### Cluster Autoscaler
+
+Completed foundational work:
+
+* Verified Auto Scaling Group tags
+* Confirmed EKS auto-discovery configuration
+* Created IAM policy
+* Created IRSA IAM Role
+* Created Kubernetes ServiceAccount
+* Created Cluster Autoscaler Deployment
+* Verified new worker node provisioning
+
+Cluster successfully scaled from three worker nodes to four nodes after resource pressure.
+
+---
+
+# Challenges Encountered
+
+## 1. Private Git Repository Authentication
+
+### Problem
+
+ArgoCD was unable to authenticate against the private GitHub repository.
+
+### Resolution
+
+Generated a Fine-Grained GitHub Personal Access Token and injected credentials securely as a Kubernetes Secret using environment variables rather than embedding secrets directly into manifests.
+
+This approach follows enterprise security practices and avoids exposing credentials within source control.
+
+---
+
+## 2. ApplicationSet YAML Parsing
+
+### Problem
+
+Initial ApplicationSet manifest failed due to YAML formatting issues.
+
+### Resolution
+
+Corrected YAML syntax and reapplied the manifest successfully.
+
+---
+
+## 3. Relative Path Errors
+
+### Problem
+
+Attempted to apply manifests using incorrect relative paths after changing directories.
+
+### Resolution
+
+Adjusted execution context and reapplied manifests using the correct repository-relative paths.
+
+---
+
+## 4. Gatekeeper Helm Installation Timeout
+
+### Problem
+
+Helm installation initially timed out and appeared to hang.
+
+### Investigation
+
+Inspection of Kubernetes events showed:
+
+* FailedScheduling
+* Insufficient cluster resources
+* Pending Gatekeeper controller pods
+
+The Helm installation itself was functioning correctly; Kubernetes lacked sufficient capacity to schedule all required pods.
+
+---
+
+## 5. Cluster Resource Exhaustion
+
+### Problem
+
+Gatekeeper deployments exceeded available node capacity.
+
+Symptoms included:
+
+* Pending Pods
+* FailedScheduling
+* "Too many pods"
+* CrashLoopBackOff during Autoscaler deployment
+
+### Resolution
+
+Investigated scheduler events and identified node capacity as the limiting factor.
+
+Implemented Cluster Autoscaler to allow the EKS Managed Node Group to automatically provision additional worker nodes when resource limits are reached.
+
+After scaling, the cluster successfully added an additional worker node and Gatekeeper components transitioned to Running.
+
+---
+
+# Lessons Learned
+
+* GitOps for private repositories requires secure credential management; Kubernetes Secrets backed by environment variables provide a cleaner and safer solution than embedding credentials.
+* ArgoCD ApplicationSets significantly reduce operational overhead by generating Application resources automatically as the platform expands.
+* Enterprise policy engines such as OPA Gatekeeper introduce meaningful scheduling overhead that must be considered during cluster sizing.
+* EKS node groups should be configured for automatic scaling before introducing admission controllers, service meshes, or other control-plane extensions.
+* Kubernetes Events (`kubectl get events`) proved to be the most effective troubleshooting tool for identifying scheduling failures and resource exhaustion.
+
+---
+
+# Current Platform Status
+
+## Completed
+
+* AWS Landing Zone
+* Terraform/Terragrunt
+* Security Hub
+* GuardDuty
+* AWS Config
+* CloudTrail
+* IAM Access Analyzer
+* Budget Guardrails
+* GitOps
+* ArgoCD
+* AppProject
+* Application
+* ApplicationSet
+* Prometheus
+* Grafana
+* Cluster Autoscaler Foundation
+
+## In Progress
+
+* OPA Gatekeeper
+* Constraint Templates
+* Admission Control
+
+---
+
+## Next Session Objectives
+
+1. Finalize Cluster Autoscaler validation.
+2. Complete OPA Gatekeeper deployment.
+3. Implement initial Constraint Templates and Constraints.
+4. Validate Admission Control by intentionally deploying a policy-violating workload.
+5. Commit all GitOps manifests and documentation to the repository.
+
+
+*********************************************************************
+
+Absolutely. This one is worth documenting because it demonstrates **methodical troubleshooting** rather than just getting a feature working. That's something interviewers care about.
+
+---
+
+# TITAN Development Journal
+
+**Date:** June 27–28, 2026
+
+**Phase:** Kubernetes Policy Enforcement (OPA Gatekeeper) & Cluster Autoscaler Validation
+
+## Objective
+
+Continue maturing the TITAN Enterprise Self-Service Platform by:
+
+* Completing Kubernetes Cluster Autoscaler
+* Implementing OPA Gatekeeper admission control
+* Building reusable security policies
+* Validating policy enforcement using intentionally insecure workloads
+
+---
+
+## Resources Created
+
+### Cluster Autoscaler
+
+Successfully implemented:
+
+* IAM Policy
+* IAM Role (IRSA)
+* Kubernetes ServiceAccount
+* ClusterRole
+* ClusterRoleBinding
+* Deployment
+* Auto-discovery configuration
+* ASG tagging
+* Autoscaling permissions
+
+Validated:
+
+* Successfully discovers EKS Managed Node Group
+* Detects unschedulable workloads
+* Calculates node utilization
+* Evaluates scale-up / scale-down decisions
+
+---
+
+### OPA Gatekeeper
+
+Installed and validated:
+
+* Gatekeeper Controller Manager
+* Admission Webhook
+* Audit Controller
+* ConstraintTemplate
+* Constraint
+
+Custom security policies created:
+
+* Disallow `:latest` container images
+* Block privileged containers
+
+---
+
+## Challenges Encountered
+
+### 1. Gatekeeper installation failed
+
+Initial Helm installation timed out.
+
+Investigation showed:
+
+* Pods remained Pending
+* Scheduler reported:
+
+```
+0/3 nodes available
+Too many pods
+```
+
+### Root Cause
+
+The EKS cluster had exhausted available pod capacity.
+
+### Resolution
+
+Implemented Kubernetes Cluster Autoscaler to dynamically increase cluster capacity when workloads cannot be scheduled.
+
+---
+
+### 2. Cluster Autoscaler CrashLoopBackOff
+
+Autoscaler initially failed with:
+
+```
+Failed to get nodes from apiserver
+nodes is forbidden
+```
+
+### Root Cause
+
+The ServiceAccount lacked the required Kubernetes RBAC permissions.
+
+The IAM permissions were correct, but Kubernetes authorization was incomplete.
+
+### Resolution
+
+Created:
+
+* ClusterRole
+* ClusterRoleBinding
+
+Granting the autoscaler permission to list and watch cluster resources.
+
+After rollout restart:
+
+```
+Cluster Autoscaler Running
+```
+
+Logs confirmed:
+
+* Node discovery
+* ASG discovery
+* Scale calculations
+* Scale-down evaluation
+
+---
+
+### 3. Privileged Container Policy Appeared Broken
+
+Testing with:
+
+```
+kubectl apply -f bad-privileged-pod.yaml
+```
+
+Unexpectedly succeeded.
+
+At first glance, it appeared the Rego policy had failed.
+
+### Investigation
+
+Verified:
+
+* YAML syntax
+* Rego logic
+* Admission webhook
+* Existing Gatekeeper installation
+
+Discovered:
+
+```
+kubectl get k8sblockprivileged
+
+error:
+the server doesn't have a resource type
+"k8sblockprivileged"
+```
+
+---
+
+## Root Cause
+
+The ConstraintTemplate had never been applied.
+
+Without the ConstraintTemplate:
+
+* Kubernetes never generated the CRD
+* The Constraint resource could not exist
+* Gatekeeper had no policy to enforce
+
+This was not a Rego issue—it was a deployment sequencing issue.
+
+---
+
+## Resolution
+
+Applied:
+
+```
+ConstraintTemplate
+```
+
+Verified:
+
+```
+kubectl get constrainttemplates
+```
+
+Confirmed CRD creation:
+
+```
+k8sblockprivileged.constraints.gatekeeper.sh
+```
+
+Applied:
+
+```
+Constraint
+```
+
+Verified:
+
+```
+kubectl get k8sblockprivileged
+```
+
+Returned:
+
+```
+ENFORCEMENT ACTION:
+deny
+```
+
+---
+
+## Validation
+
+Retested the insecure workload.
+
+Attempted deployment:
+
+```
+securityContext:
+  privileged: true
+```
+
+Gatekeeper rejected the request:
+
+```
+Error:
+
+[block-privileged]
+
+Container nginx is privileged.
+
+Privileged containers are not allowed.
+```
+
+Policy enforcement successfully validated.
+
+---
+
+## Key Lessons Learned
+
+### Kubernetes authorization and AWS IAM are separate systems.
+
+IRSA solved AWS API authentication.
+
+RBAC solved Kubernetes API authorization.
+
+Both were required.
+
+---
+
+### ConstraintTemplates create Kubernetes APIs.
+
+A Constraint cannot function until its corresponding ConstraintTemplate has successfully registered a CRD with the Kubernetes API server.
+
+---
+
+### Diagnose before rewriting.
+
+Rather than assuming the Rego policy was incorrect, troubleshooting followed a structured approach:
+
+* Validate workload
+* Validate policy
+* Validate Gatekeeper
+* Validate CRD registration
+* Validate Constraint
+* Retest
+
+The issue was deployment order, not policy logic.
+
+---
+
+## Current Platform Status
+
+### ✅ Completed
+
+* AWS Foundation
+* Terraform / Terragrunt
+* GitOps
+* ArgoCD
+* EKS
+* Cluster Autoscaler
+* OPA Gatekeeper
+* Latest Image Policy
+* Privileged Container Policy
+* Prometheus
+* Grafana
+* Security Hub
+* GuardDuty
+* AWS Config
+* IAM Access Analyzer
+
+---
+
+## Next Objective
+
+Continue platform maturation by implementing:
+
+* Executive Operational Dashboards
+
+  * GitOps synchronization
+  * Cluster health
+  * Autoscaler activity
+  * Policy compliance
+  * Security posture
+* Improve ArgoCD workflow to manage platform applications declaratively
+* Continue working through the remaining checklist toward 100% completion.
+
+---
+
+Upon seeing that the privileged pod was admitted, I did not jump straight to "the Rego policy is broken." Instead, I traced the request through the entire admission chain:
+
+1. Is the test manifest correct?
+2. Is the webhook running?
+3. Is the ConstraintTemplate installed?
+4. Was the CRD generated?
+5. Does the Constraint exist?
+6. Is enforcement set to `deny`?
+7. Re-run the test.
+
+This is why verifying each layer rather than assuming the last thing changed is at fault.
+
+**********************************************************************
+
+TITAN Build Journal — Observability Platform (Loki Integration)
+
+Date: 2026-06-28
+
+Objective
+Integrate enterprise-grade centralized logging into TITAN by deploying Grafana Loki alongside the existing Prometheus/Grafana monitoring stack.
+
+Completed
+Successfully deployed Grafana Loki using the current Grafana Helm chart.
+Replaced deprecated Loki deployment approach with the supported single-binary deployment.
+Configured Loki Gateway for centralized log ingestion.
+Verified Loki services and StatefulSet deployment.
+Installed Promtail as a DaemonSet for Kubernetes node log collection.
+Confirmed Promtail scheduling issue was unrelated to Helm configuration.
+Root Cause Investigation
+
+Initial assumption:
+
+Loki/Promtail deployment issue.
+
+Actual findings:
+
+Worker nodes were reaching the Kubernetes pod-per-node limit.
+Original EKS worker nodes used t3.small instances supporting only 11 pods/node.
+Promtail DaemonSet could not schedule on saturated nodes.
+Infrastructure Improvements
+Upgraded managed node group from t3.small to t3.medium.
+Increased pod capacity from 11 to 17 pods per worker.
+Successfully replaced original worker nodes.
+Remaining Issue
+
+Replacement nodes intermittently entered:
+
+NotReady
+NetworkPluginNotReady
+CNI plugin not initialized
+
+Observed errors:
+
+aws-cni
+connection refused
+127.0.0.1:50051
+
+This indicates an AWS VPC CNI initialization issue rather than a Loki or Promtail deployment issue.
+
+Current Status
+Grafana ✅
+Prometheus ✅
+Loki ✅
+Promtail: partially operational (2/3 running)
+Remaining work centers on stabilizing AWS VPC CNI and managed node initialization.
+Next Session
+Validate Managed Node Group health.
+Validate AWS VPC CNI deployment.
+Stabilize worker node initialization.
+Achieve Promtail DaemonSet 3/3 Ready.
+Connect Grafana to Loki.
+Build log dashboards.
+Deploy Tempo for distributed tracing.
+Integrate External Secrets.
+Continue Platform API implementation.
 
 

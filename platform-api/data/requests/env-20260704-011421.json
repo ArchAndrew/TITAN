@@ -1,0 +1,19 @@
+{
+  "nextStep": "policy-validation-approval-and-gitops-workflow",
+  "request": {
+    "cost_center": "platform",
+    "environment": "dev",
+    "owner": "Andrew",
+    "project_name": "titan",
+    "region": "us-east-1"
+  },
+  "requestId": "env-20260704-011421",
+  "stage": "terraform-apply",
+  "status": "approved",
+  "terraform": {
+    "command": "terragrunt run-all plan --terragrunt-working-dir ../live/dev/us-east-1",
+    "message": "Terraform plan prepared; apply requires approval workflow",
+    "mode": "plan-only"
+  },
+  "workflow": "environment-provisioning"
+}

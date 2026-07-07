@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockPrivileged
+metadata:
+  name: block-privileged
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+      - kube-system
+      - gatekeeper-system
+      - monitoring
+      - argocd
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]

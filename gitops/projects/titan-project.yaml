@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: titan
+
+  namespace: argocd
+
+spec:
+
+  description: TITAN Enterprise Platform
+
+  sourceRepos:
+    - https://github.com/ArchAndrew/Self-Service-Platform.git
+
+  destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 
 spec:
-  project: default
+  project: titan
 
   source:
     repoURL: https://github.com/ArchAndrew/Self-Service-Platform.git 
