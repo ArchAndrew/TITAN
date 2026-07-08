@@ -100,32 +100,6 @@ Cilium + Hubble
 
 [insert screenshot here]
 
-
-
-
----
-
-## Architecture
-
-```text
-Developer
-    ↓
-Self-Service Portal
-    ↓
-Platform API
-    ↓
-Workflow Engine
-    ↓
-Terraform
-    ↓
-AWS Platform Services
-
-         ↑
- Governance Layer
-
-         ↑
- Observability Layer
-
          
 ```
 
