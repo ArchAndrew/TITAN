@@ -1,15 +1,15 @@
 # TITAN
 
-Enterprise AI-Governed Self-Service Platform
+Enterprise Internal Developer Platform (IDP) 
+
+Secure • Governed • Self-Service Cloud Infrastructure
 
 ## Overview
 
-TITAN is an enterprise self-service platform designed to automate cloud infrastructure provisioning, Kubernetes onboarding, secrets management, CI/CD enablement, governance enforcement, observability, and AI-assisted operations.
+Made to provision compliant AWS infrastructure in minutes instead of days using Terraform, GitOps, Kubernetes, and automated DevSecOps guardrails. This repository is built to demonstrate enterprise Platform Engineering, Cloud Governance,
+and Infrastructure Automation at production scale.
 
-The platform is built around modern Platform Engineering principles, enabling development teams to safely consume infrastructure and platform capabilities through governed, repeatable, and automated workflows.
-
-TITAN is designed to demonstrate real-world cloud architecture, DevSecOps, platform engineering, cloud governance, and AI governance practices aligned with enterprise environments.
-
+[INSERT DIAGRAM IMAGE HERE]
 ---
 
 ## Problem Statement
@@ -30,16 +30,25 @@ TITAN addresses these challenges by providing a secure self-service platform tha
 
 ---
 
-## Business Objectives
+## Business Outcomes
 
-- Reduce infrastructure provisioning time
-- Improve developer productivity
-- Standardize cloud governance
-- Embed security into platform workflows
-- Provide self-service capabilities with guardrails
-- Improve platform observability
-- Enable AI-assisted operations with human oversight
-- Generate compliance and audit evidence automatically
+✔ Developer self-service
+
+✔ Governance by default
+
+✔ Security by default
+
+✔ GitOps delivery model
+
+✔ Policy as Code
+
+✔ Multi-account AWS governance
+
+✔ Runtime Kubernetes security
+
+✔ Continuous compliance validation
+
+✔ Enterprise observability
 
 ---
 
@@ -47,37 +56,29 @@ TITAN addresses these challenges by providing a secure self-service platform tha
 
 ### Platform Engineering
 
-- Self-service infrastructure requests
-- Environment factory
-- Namespace factory
-- Access request workflows
-- Secrets management workflows
-- Application onboarding
+Self-service infrastructure provisioning through reusable Terraform modules
+orchestrated by GitOps workflows.
+
+[insert screenshot here]
 
 ### Cloud Governance
+AWS Organizations, Control Tower, IAM Identity Center,
+SCP Guardrails, Budget Controls, AWS Config,
+Security Hub.
 
-- AWS Organizations
-- AWS Control Tower
-- Service Control Policies (SCPs)
-- Budget Guardrails
-- Tagging Standards
-- Policy Enforcement
+[insert screenshot here]
 
-### DevSecOps
+### GitOps
 
-- Infrastructure as Code
-- GitHub Actions
-- Security Validation Pipelines
-- Policy as Code
-- Vulnerability Scanning
+Declarative application delivery using ArgoCD.
 
-### Kubernetes
+[insert screenshot here]
 
-- Amazon EKS
-- Namespace Provisioning
-- RBAC Automation
-- Network Policies
-- Resource Quotas
+### Kubernetes Networking
+
+Cilium + Hubble
+
+[insert screenshot here]
 
 ### Observability
 
@@ -87,14 +88,20 @@ TITAN addresses these challenges by providing a secure self-service platform tha
 - Alerting
 - Operational Dashboards
 
-### AI-Assisted Operations
+### DevSecOps Security Gates
 
-- Natural language request interpretation
-- Incident summarization
-- Documentation generation
-- Recommendation engine
+| Tool     | Purpose                |
+| -------- | ---------------------- |
+| Gitleaks | Secret Detection       |
+| Checkov  | IaC Security           |
+| Trivy    | Vulnerability Scanning |
+| Conftest | Policy Validation      |
+| Snyk     | Dependency Security    |
 
-All AI-assisted capabilities require human approval before infrastructure changes are executed.
+[insert screenshot here]
+
+
+
 
 ---
 
@@ -119,9 +126,7 @@ AWS Platform Services
          ↑
  Observability Layer
 
-         ↑
- AI Assistant Layer
- (Human Approval Required)
+         
 ```
 
 ---
@@ -164,9 +169,6 @@ AWS Platform Services
 - Access Analyzer
 - AWS Config
 
-### AI
-
-- Azure OpenAI
 
 ---
 
@@ -198,81 +200,62 @@ TITAN incorporates controls related to:
 - System Integrity
 - Contingency Planning
 
-### NIST AI RMF
-
-TITAN aligns AI-assisted functionality with:
-
-- Govern
-- Map
-- Measure
-- Manage
-
-AI recommendations are never authoritative.
-
-Human oversight is required for execution.
 
 ---
+### Documentation
 
-## Architecture Decision Records
+Executive Overview
 
-Key design decisions are documented within:
+Architecture
 
-```text
-docs/architecture-decisions/
-```
+Runbooks
 
+ADR
+
+Implementation Journal
+
+Platform Components
+
+Platform API
+
+Detection Use Cases
 ---
 
-## Project Journal
+## Current Platform
 
-Lessons learned, implementation notes, challenges, and engineering decisions are documented within:
+✅ AWS Multi-account Governance
 
-```text
-docs/journal/
-```
+✅ GitOps
 
----
+✅ DevSecOps
 
-## Roadmap
+✅ Runtime Security
 
-### Phase 1
+✅ Observability
 
-- Repository Foundation
-- Governance Framework
-- Platform API
+Upcoming
 
-### Phase 2
+Platform API
 
-- Workflow Engine
-- Terraform Automation
-- Kubernetes Integration
+Developer Portal
 
-### Phase 3
+Workflow Orchestration
 
-- DevSecOps Controls
-- Observability Platform
+AI Assistant (Future)
 
-### Phase 4
-
-- AI-Assisted Operations
-- Compliance Automation
-
-### Phase 5
-
-- Enterprise Platform Release (v1.0)
-
+Enterprise Release
 ---
 
 ## Project Status
 
-Current Version:
-
-```text
-v0.0.1
-```
+Version - v1
 
 Status:
 
-```text
-Architecture & Foundation
-```
+Feature Complete
+
+Current Focus;
+
+Documentation
+Executive Dashboards
+Demonstration
