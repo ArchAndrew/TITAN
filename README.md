@@ -153,7 +153,7 @@ AWS Platform Services
 ### Development
 
 - Python
-- FastAPI
+- GO
 
 ### Observability
 
