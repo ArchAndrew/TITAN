@@ -233,7 +233,7 @@ Detection Use Cases
 
 ✅ Observability
 
-Upcoming
+Upcoming:
 
 Platform API
 
