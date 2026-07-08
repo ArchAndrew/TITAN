@@ -12,6 +12,17 @@ and Infrastructure Automation at production scale.
 [INSERT DIAGRAM IMAGE HERE]
 ---
 
+## Highlights
+
+• GitOps
+• DevSecOps
+• Cilium
+• OPA
+• Observability
+• Self-Service
+• Governance
+• Cost Controls
+---
 ## Problem Statement
 
 Engineering teams frequently depend on centralized cloud and infrastructure teams for common operational tasks such as:
