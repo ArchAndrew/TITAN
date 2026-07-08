@@ -111,9 +111,6 @@ Cilium + Hubble
 
 [insert screenshot here]
 
-         
-```
-
 ---
 
 ## Technology Stack
