@@ -124,13 +124,13 @@ notification_email = get_env(
 Configured local environment:
 
 ```bash
-export TITAN_NOTIFICATION_EMAIL="andrew@strongtowersecurity.io"
+export TITAN_NOTIFICATION_EMAIL="arch@example.io"
 ```
 
 Verified:
 
 ```bash
-git grep "andrew@strongtowersecurity.io"
+git grep "arch@example.io"
 ```
 
 returned no repository matches.

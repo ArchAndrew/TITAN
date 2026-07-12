@@ -839,7 +839,6 @@ Although it was frustrating at times, working through the problem reinforced an 
 
 ---
 
-I would consider this one of the strongest journal entries in the project so far. It documents a realistic enterprise implementation with genuine troubleshooting, which is the kind of experience that often comes up in senior platform engineering and cloud architecture interviews.
 
 
 

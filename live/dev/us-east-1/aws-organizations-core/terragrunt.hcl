@@ -10,27 +10,27 @@ inputs = {
   member_accounts = {
     audit = {
       name  = "TITAN-Audit"
-      email = "thekingsown3733+audit@gmail.com"
+      email = "audit@example.com"
     }
 
     log_archive = {
       name  = "TITAN-Log-Archive"
-      email = "thekingsown3733+log-archive@gmail.com"
+      email = "archive@example.com"
     }
 
     shared_services = {
       name  = "TITAN-Shared-Services"
-      email = "thekingsown3733+shared-services@gmail.com"
+      email = "shared-services@example.com"
     }
 
     platform_dev = {
       name  = "TITAN-Platform-Dev"
-      email = "thekingsown3733+platform-dev@gmail.com"
+      email = "platform-dev@example.com"
     }
 
     platform_prod = {
       name  = "TITAN-Platform-Prod"
-      email = "thekingsown3733+platform-prod@gmail.com"
+      email = "platform-prod@example.com"
     }
   }
 }

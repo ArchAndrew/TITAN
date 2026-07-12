@@ -9,7 +9,7 @@ echo "Scaling $CLUSTER_NAME / $NODEGROUP_NAME UP..."
 aws eks update-nodegroup-config \
   --cluster-name "$CLUSTER_NAME" \
   --nodegroup-name "$NODEGROUP_NAME" \
-  --scaling-config minSize=2,desiredSize=4,maxSize=5
+  --scaling-config minSize=7,desiredSize=7,maxSize=8
 
 echo "Scale-up requested."
 echo "Watch recovery with:"

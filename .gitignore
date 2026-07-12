@@ -36,3 +36,18 @@ __pycache__/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Local configuration
+*.local
+*.secret
+secrets/
+credentials/
+
+# AWS CLI
+.aws/
+
+# Terraform overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

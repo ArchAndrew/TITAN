@@ -17,9 +17,9 @@ inputs = {
 
   node_instance_types = ["t3.medium"]
 
-  desired_size = 3
-  min_size     = 2
-  max_size     = 5
+  desired_size = 7
+  min_size     = 7
+  max_size     = 8
 
   tags = {
     Project          = "TITAN"

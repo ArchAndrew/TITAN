@@ -522,18 +522,31 @@ Planned integrations:
 * Executive Security Dashboard
 * Automated Remediation Workflows
 
-````
+---
 
-This document is now strong enough to serve as:
-1. A runbook for an operator.
-2. A compliance evidence artifact.
-3. An interview talking point.
-4. A portfolio artifact for GitHub.
+# Related Documents
 
-And those CloudWatch screenshots you just captured are exactly the type of screenshots I'd save under:
+- High-Level Architecture
+- Data Flow
+- Threat Model
+- Trust Boundaries
+- Security Control Mapping
 
-```text
-compliance/evidence/screenshots/securityhub-investigation/
-````
+---
 
-because they prove the workflow actually executed end-to-end.
+# Roles and Responsibilities
+
+| Role | Responsibility |
+|------|----------------|
+| Developer | Submit Request |
+| Platform Engineer | Provision and Validate |
+| Security Engineer | Review Security Controls |
+| Cloud Operations | Monitor Platform |
+
+---
+
+# Revision History
+
+| Version | Date | Description |
+|----------|------|-------------|
+| 1.0 | Initial Release | Initial enterprise runbook for TITAN |
