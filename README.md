@@ -11,6 +11,7 @@ Made to provision compliant AWS infrastructure in minutes instead of days using 
 and Infrastructure Automation at production scale.
 
 <img src= https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/Titan_Diagram.png.png style="width:1000px;">
+
 ---
 
 ## Highlights
