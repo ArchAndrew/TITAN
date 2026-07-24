@@ -10,7 +10,7 @@ Platform Engineering • DevSecOps • Cloud Governance • Kubernetes
 Made to provision compliant AWS infrastructure in minutes instead of days using Terraform, GitOps, Kubernetes, and automated DevSecOps guardrails. This repository is built to demonstrate enterprise Platform Engineering, Cloud Governance,
 and Infrastructure Automation at production scale.
 
-[INSERT DIAGRAM IMAGE HERE]
+<img src= https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/Titan_Diagram.png.png style="width:1000px;">
 ---
 
 ## Highlights
