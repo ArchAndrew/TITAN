@@ -103,13 +103,13 @@ Cilium + Hubble
 
 ### DevSecOps Security Gates
 
-| Tool     | Purpose                |
-| -------- | ---------------------- |
-| Gitleaks | Secret Detection       |
-| Checkov  | IaC Security           |
-| Trivy    | Vulnerability Scanning |
-| Conftest | Policy Validation      |
-| Snyk     | Dependency Security    |
+| Tool     | Purpose                | Status       |
+| -------- | ---------------------- | ------------ |
+| Gitleaks | Secret Detection       | Implemented  |
+| Checkov  | IaC Security           | Implemented  |
+| Trivy    | Vulnerability Scanning | Implemented  |
+| Conftest | Policy Validation      | Implemented  |
+| Snyk     | Dependency Security    | Implemented  |
 
 [insert screenshot here]
 
