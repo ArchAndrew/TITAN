@@ -824,4 +824,489 @@ It demonstrates how Platform Engineering combines infrastructure, automation, se
 
 Rather than asking application teams to understand every AWS service, TITAN provides a secure, opinionated foundation that enables engineers to focus on delivering business value while the platform enforces organizational standards automatically.
 
+<!-- ========================================================= -->
+# Cloud Security Operations
+
+Deploying secure infrastructure is only the beginning.
+
+Modern cloud platforms require continuous monitoring, centralized visibility, automated detection, and rapid response to maintain an acceptable security posture over time.
+
+TITAN approaches cloud security as a continuous operational process rather than a one-time deployment activity.
+
+Instead of relying on individual AWS services operating independently, multiple security services work together to create a unified security ecosystem.
+
+The platform continuously collects telemetry, evaluates cloud resources against organizational policies, identifies suspicious behavior, aggregates findings, and provides centralized dashboards for operational visibility.
+
+This creates a feedback loop where infrastructure is continuously evaluated throughout its lifecycle rather than only during deployment.
+
+---
+
+# Security Architecture
+
+The security architecture follows a defense-in-depth strategy.
+
+Rather than depending on a single security product, multiple independent security controls reduce overall organizational risk.
+
+```
+                 GitHub Actions
+                        │
+          Terraform / Checkov / Trivy
+                        │
+                        ▼
+                 AWS Infrastructure
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+ GuardDuty        AWS Config      CloudTrail
+        │               │               │
+        └───────────────┼───────────────┘
+                        ▼
+                 Security Hub
+                        │
+             EventBridge Rules
+                        │
+                    Lambda
+                        │
+                    SNS Alerts
+                        │
+         Executive Dashboards
+```
+
+<!-- INSERT IMAGE: SecurityHub_Dashboard.png -->
+
+---
+
+# AWS Security Hub
+
+Security Hub serves as the central security aggregation layer for the TITAN platform.
+
+Rather than requiring engineers to investigate multiple AWS services independently, Security Hub consolidates findings into a single operational view.
+
+Security Hub continuously aggregates findings from services including:
+
+- GuardDuty
+- AWS Config
+- IAM Access Analyzer
+- Inspector (future integration)
+- Security Hub Standards
+- Third-party integrations
+
+This creates a centralized operational dashboard where engineers can rapidly identify security posture across the platform.
+
+---
+
+# Why Security Hub?
+
+Enterprise environments often generate findings from dozens of security products.
+
+Without centralization, engineers spend valuable time switching between consoles attempting to correlate security events.
+
+Security Hub eliminates this fragmentation by normalizing findings into a common format.
+
+Benefits include:
+
+- Centralized visibility
+- Consistent severity scoring
+- Security posture reporting
+- Compliance reporting
+- Simplified investigations
+- Executive dashboards
+
+Security Hub therefore becomes the operational "single pane of glass" for cloud security.
+
+---
+
+# Amazon GuardDuty
+
+GuardDuty provides intelligent threat detection throughout the AWS environment.
+
+Unlike traditional signature-based monitoring systems, GuardDuty continuously analyzes AWS telemetry using machine learning, behavioral analytics, and AWS threat intelligence.
+
+Telemetry sources include:
+
+- CloudTrail Events
+- VPC Flow Logs
+- DNS Logs
+- Kubernetes Audit Logs
+- Runtime telemetry
+
+GuardDuty identifies suspicious activity such as:
+
+- Cryptocurrency mining
+- Credential compromise
+- Privilege escalation
+- Reconnaissance
+- Malware activity
+- Command and Control communication
+
+Rather than generating raw log data, GuardDuty produces actionable findings prioritized by severity.
+
+---
+
+# Why GuardDuty?
+
+Security teams should spend time investigating meaningful events—not manually analyzing billions of log entries.
+
+GuardDuty transforms raw cloud telemetry into prioritized security intelligence.
+
+This dramatically reduces investigation time while improving detection capabilities.
+
+Within TITAN, GuardDuty findings are automatically centralized through Security Hub for correlation with additional platform telemetry.
+
+---
+
+# AWS Config
+
+Infrastructure continuously changes.
+
+Without governance, environments gradually drift away from organizational standards.
+
+AWS Config continuously evaluates cloud resources against defined compliance rules.
+
+Examples include:
+
+- Encryption enabled
+- Public S3 buckets
+- Security Group configuration
+- IAM policy compliance
+- Required tagging
+- Logging enabled
+
+Rather than identifying configuration issues during periodic audits, Config continuously evaluates resources throughout their lifecycle.
+
+---
+
+# Why AWS Config?
+
+Cloud environments are dynamic.
+
+Resources are created, modified, and removed continuously.
+
+Manual compliance reviews become increasingly ineffective as environments scale.
+
+AWS Config transforms compliance from a periodic activity into a continuous operational process.
+
+This enables engineering teams to identify policy violations shortly after they occur rather than weeks or months later.
+
+---
+
+# AWS CloudTrail
+
+CloudTrail provides the audit history of the platform.
+
+Every significant AWS API action is recorded, creating a comprehensive record of operational activity across the environment.
+
+Examples include:
+
+- IAM changes
+- Security Group modifications
+- Route Table updates
+- Terraform deployments
+- EKS operations
+- KMS activity
+- S3 access
+- Administrative actions
+
+CloudTrail therefore acts as the authoritative source for operational auditing.
+
+---
+
+# Why CloudTrail?
+
+Enterprise organizations require the ability to answer questions such as:
+
+- Who changed this resource?
+- When was it modified?
+- What was changed?
+- Which credentials performed the action?
+
+CloudTrail provides the forensic history required for incident response, compliance, troubleshooting, and operational accountability.
+
+---
+
+# IAM Access Analyzer
+
+Identity is one of the most common attack surfaces within cloud environments.
+
+IAM Access Analyzer continuously evaluates resource-based policies to identify unintended external access.
+
+Resources evaluated include:
+
+- IAM Roles
+- S3 Buckets
+- KMS Keys
+- AWS Services
+- Cross-account trust relationships
+
+This helps identify permissions that may unintentionally expose resources outside the organization.
+
+---
+
+# AWS KMS
+
+Encryption forms one of the foundational security controls throughout TITAN.
+
+AWS Key Management Service (KMS) manages customer-controlled encryption keys used across platform services.
+
+Examples include:
+
+- Terraform State
+- CloudTrail Logs
+- Config Snapshots
+- S3 Buckets
+- EBS Volumes
+- Kubernetes Secrets (future enhancement)
+
+Centralized key management simplifies auditing while maintaining consistent encryption practices across the environment.
+
+<!-- INSERT IMAGE: KMS_Keys.png -->
+
+---
+
+# Security Automation
+
+Security findings become significantly more valuable when they trigger automated responses.
+
+Rather than requiring engineers to manually monitor AWS consoles, TITAN incorporates event-driven security automation.
+
+The automation pipeline consists of:
+
+Security Hub
+
+↓
+
+EventBridge
+
+↓
+
+Lambda
+
+↓
+
+SNS
+
+↓
+
+Security Notifications
+
+This architecture allows critical security events to generate immediate notifications while remaining extensible for future integrations such as ServiceNow, Slack, PagerDuty, or Jira.
+
+---
+
+# Executive Security Dashboard
+
+Cloud security data should be understandable by more than just security engineers.
+
+Executive dashboards summarize organizational security posture into easily consumable operational metrics.
+
+Examples include:
+
+- Open findings
+- Severity distribution
+- Compliance posture
+- Service coverage
+- GuardDuty findings
+- Config compliance
+- Security Hub trends
+
+These dashboards provide leadership with high-level visibility while allowing engineering teams to drill into detailed findings when required.
+
+<!-- INSERT IMAGE: Executive_Security_Dashboard.png -->
+
+---
+
+# Observability Platform
+
+Operating distributed cloud platforms requires visibility into infrastructure, applications, Kubernetes, and networking.
+
+TITAN implements a modern observability stack designed around the three pillars of observability:
+
+- Metrics
+- Logs
+- Traces
+
+Together these provide engineers with the context necessary to understand system behavior rather than simply reacting to isolated alerts.
+
+---
+
+# Why Observability Matters
+
+Monitoring answers:
+
+> "Is something broken?"
+
+Observability answers:
+
+> "Why is it broken?"
+
+As distributed systems become increasingly complex, understanding relationships between infrastructure, applications, networking, and security becomes critical.
+
+The TITAN observability platform provides that visibility.
+
+---
+
+# Prometheus
+
+Prometheus collects time-series metrics from Kubernetes workloads and infrastructure components.
+
+Examples include:
+
+- CPU utilization
+- Memory usage
+- Node health
+- Pod health
+- Kubernetes control plane metrics
+- Application metrics
+
+These metrics provide the quantitative foundation for operational monitoring.
+
+---
+
+# Loki
+
+Logs explain what happened.
+
+Loki centralizes Kubernetes logs without requiring expensive indexing strategies.
+
+This allows engineers to investigate:
+
+- Application failures
+- Kubernetes events
+- Container output
+- Platform services
+- Operational incidents
+
+Because Loki integrates directly with Grafana, logs can be correlated alongside metrics and traces.
+
+---
+
+# Tempo
+
+Metrics identify symptoms.
+
+Logs explain events.
+
+Distributed tracing explains request behavior.
+
+Tempo captures distributed traces that follow requests as they traverse multiple services.
+
+This allows engineers to identify:
+
+- Latency bottlenecks
+- Failed requests
+- Slow dependencies
+- Service interactions
+
+Distributed tracing dramatically improves troubleshooting of cloud-native applications.
+
+---
+
+# Mimir
+
+As organizations scale, metrics storage requirements grow significantly.
+
+Grafana Mimir provides highly scalable long-term metrics storage while maintaining compatibility with Prometheus.
+
+This allows historical platform metrics to remain available for operational analysis, capacity planning, and trend identification.
+
+---
+
+# Grafana
+
+Grafana provides the operational visualization layer for the entire platform.
+
+Rather than requiring engineers to manually query individual monitoring systems, Grafana centralizes:
+
+- Infrastructure dashboards
+- Kubernetes dashboards
+- Security dashboards
+- Network telemetry
+- Performance metrics
+- Platform health
+
+Dashboards provide both executive summaries and engineering-level operational detail.
+
+<!-- INSERT IMAGE: Grafana_Dashboard.png -->
+
+---
+
+# CloudWatch
+
+CloudWatch complements the Kubernetes observability stack by providing AWS-native operational telemetry.
+
+CloudWatch monitors services including:
+
+- EC2
+- NAT Gateway
+- EKS
+- Lambda
+- S3
+- CloudTrail
+- Billing Metrics
+
+Together, CloudWatch and Grafana provide comprehensive visibility across both AWS infrastructure and Kubernetes workloads.
+
+<!-- INSERT IMAGE: CloudWatch_Dashboard.png -->
+
+---
+
+# Disaster Recovery Philosophy
+
+Cloud resilience extends beyond backups.
+
+TITAN emphasizes infrastructure recoverability.
+
+Rather than relying solely on restoring existing infrastructure, the platform is designed to rebuild infrastructure from declarative source code.
+
+Key recovery principles include:
+
+- Infrastructure as Code
+- Version-controlled configuration
+- Encrypted Terraform state
+- State versioning
+- Modular infrastructure
+- Repeatable deployments
+
+This significantly reduces recovery complexity while improving consistency.
+
+---
+
+# Cost Governance
+
+Platform Engineering includes financial responsibility.
+
+Operational ownership continues after infrastructure has been deployed.
+
+TITAN incorporates cost governance through:
+
+- AWS Budgets
+- Cost Explorer
+- Cost Monitoring
+- Budget Alerts
+- Resource Visibility
+
+These services allow engineers to identify unexpected spending while encouraging responsible cloud consumption.
+
+<!-- INSERT IMAGE: AWS_Budgets.png -->
+
+<!-- INSERT IMAGE: Cost_Explorer.png -->
+
+---
+
+# Why Cost Governance Matters
+
+Cloud infrastructure can scale rapidly.
+
+Without operational visibility, costs can increase long before engineering teams recognize the problem.
+
+Implementing proactive budgeting and cost analysis encourages continuous operational awareness rather than reactive cost reduction.
+
+One practical example during the development of TITAN was identifying the ongoing cost impact of managed Kubernetes infrastructure and networking components. That visibility informed decisions about when to decommission resources after validating functionality and capturing screenshots for documentation.
+
+This reinforces an important operational principle:
+
+> Building infrastructure is only half the job. Operating it responsibly—including understanding its financial impact—is equally important.
+
+
+
 
