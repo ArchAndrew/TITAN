@@ -399,3 +399,429 @@ Rather than requiring every engineering team to become experts in networking, se
 
 This philosophy allows Platform Engineers to focus on continuously improving the platform while enabling application teams to deliver business value faster, more securely, and with significantly less operational overhead.
 
+<!-- ========================================================= -->
+# Kubernetes Platform
+
+The Kubernetes platform serves as the primary application runtime within TITAN.
+
+Rather than treating Kubernetes as simply another compute service, it was designed as the operational foundation for modern cloud-native workloads. The platform combines managed infrastructure, GitOps automation, policy enforcement, network security, and centralized observability into a unified operational environment.
+
+Amazon Elastic Kubernetes Service (EKS) was selected to provide a managed control plane while allowing engineering teams to retain full control over worker nodes, networking, security, and platform services.
+
+The Kubernetes platform was intentionally designed around four engineering principles:
+
+- Secure by Default
+- GitOps Driven
+- Observable
+- Policy Enforced
+
+<!-- INSERT IMAGE: EKS_Node_Groups.png -->
+
+---
+
+# Why Amazon EKS?
+
+Building a Kubernetes platform requires balancing operational flexibility with long-term maintenance.
+
+Rather than operating a self-managed Kubernetes control plane, Amazon EKS was selected because AWS manages:
+
+- Kubernetes Control Plane
+- API Server Availability
+- etcd Management
+- Automated Control Plane Patching
+- High Availability
+- Control Plane Monitoring
+
+This allows Platform Engineers to focus on platform capabilities instead of maintaining Kubernetes infrastructure.
+
+Worker nodes remain fully managed by the platform, providing complete control over:
+
+- Node sizing
+- Autoscaling
+- Networking
+- Security
+- Storage
+- Scheduling
+
+This approach reduces operational overhead while maintaining enterprise flexibility.
+
+---
+
+# Managed Node Groups
+
+Worker nodes are deployed using Amazon EKS Managed Node Groups.
+
+Benefits include:
+
+- Automated node lifecycle management
+- Rolling node updates
+- Simplified scaling
+- Integration with AWS Auto Scaling
+- Improved operational consistency
+
+Node groups provide the compute resources used to host workloads while allowing Kubernetes to dynamically schedule containers across the cluster.
+
+---
+
+# GitOps with ArgoCD
+
+One of the core architectural decisions within TITAN was adopting GitOps as the deployment model.
+
+Rather than engineers manually applying Kubernetes manifests using kubectl, the desired cluster state is declared in Git repositories.
+
+ArgoCD continuously monitors Git repositories and reconciles the running cluster with the desired configuration.
+
+This means Git becomes the single source of truth for Kubernetes.
+
+Benefits include:
+
+- Declarative deployments
+- Automatic drift correction
+- Rollback through Git history
+- Auditable infrastructure changes
+- Improved deployment consistency
+- Simplified disaster recovery
+
+Rather than asking:
+
+> "What is currently deployed?"
+
+GitOps asks:
+
+> "Does the cluster match Git?"
+
+If not, ArgoCD automatically restores the desired state.
+
+<!-- INSERT IMAGE: ArgoCD_Applications.png -->
+
+---
+
+# Why GitOps?
+
+Traditional deployment workflows rely on engineers manually applying configuration changes.
+
+While effective for small environments, this becomes increasingly difficult to manage as engineering organizations grow.
+
+GitOps provides several operational advantages:
+
+- Every deployment is version controlled
+- Infrastructure changes require peer review
+- Rollbacks become trivial
+- Configuration drift is automatically corrected
+- Platform state becomes reproducible
+
+Git therefore becomes both the deployment mechanism and the operational documentation.
+
+---
+
+# Kubernetes Network Security
+
+Networking inside Kubernetes differs significantly from traditional virtual machine networking.
+
+Containers communicate dynamically across nodes, making visibility and security substantially more challenging.
+
+To address this, TITAN implements **Cilium** as the Kubernetes Container Network Interface (CNI).
+
+Rather than relying solely on traditional IP-based networking, Cilium introduces identity-aware networking using eBPF.
+
+This enables:
+
+- Layer 3 Network Policies
+- Layer 4 Network Policies
+- Layer 7 Application Policies
+- Identity-aware communication
+- High-performance packet processing
+- Advanced traffic visibility
+
+<!-- INSERT IMAGE: Cilium_Status.png -->
+
+---
+
+# Why Cilium?
+
+Several Kubernetes networking solutions exist.
+
+Cilium was selected because it provides significantly more than basic pod networking.
+
+Its eBPF-based architecture enables deep visibility into Kubernetes communication while enforcing security policies with minimal overhead.
+
+Compared to traditional networking approaches, Cilium provides:
+
+- Better performance
+- Rich observability
+- Identity-based security
+- Fine-grained network policy enforcement
+- Reduced dependency on iptables
+
+This makes it particularly well suited for enterprise Kubernetes environments where east-west traffic visibility is critical.
+
+---
+
+# Hubble Observability
+
+Network visibility is often one of the most difficult aspects of Kubernetes troubleshooting.
+
+Hubble extends Cilium by providing real-time insight into cluster communication.
+
+Rather than guessing how services communicate, Platform Engineers can observe:
+
+- Pod-to-pod communication
+- Service dependencies
+- DNS requests
+- HTTP traffic
+- Blocked network policies
+- Security events
+
+This dramatically simplifies troubleshooting while improving overall platform visibility.
+
+<!-- INSERT IMAGE: Hubble_UI.png -->
+
+---
+
+# Policy Enforcement with OPA Gatekeeper
+
+Infrastructure should not rely on engineers remembering organizational standards.
+
+Instead, those standards should be enforced automatically.
+
+TITAN implements **OPA Gatekeeper** to enforce Kubernetes admission policies before workloads are deployed.
+
+Examples include:
+
+- Blocking privileged containers
+- Restricting host networking
+- Preventing insecure capabilities
+- Requiring resource requests
+- Enforcing labels
+- Restricting container images
+
+Policy enforcement occurs before workloads reach the cluster.
+
+This significantly reduces operational risk.
+
+---
+
+# Engineering Challenge: OPA Gatekeeper
+
+During implementation, Gatekeeper correctly blocked the deployment of a privileged workload required by one of the platform components.
+
+Rather than disabling policy enforcement entirely, the issue was investigated to determine why the admission request violated policy.
+
+The solution involved creating a narrowly scoped exception that allowed the required privileged workload while preserving the platform's overall security posture.
+
+This reinforced an important Platform Engineering principle:
+
+> Platform guardrails should be intentionally designed—not bypassed.
+
+Although exceptions occasionally become necessary, they should always remain explicit, documented, and narrowly scoped.
+
+---
+
+# Kubernetes Security Model
+
+Security within TITAN follows a layered approach.
+
+Security begins before workloads reach Kubernetes and continues throughout runtime.
+
+Controls include:
+
+### Platform Layer
+
+- IAM Roles
+- Security Groups
+- KMS Encryption
+- Private Networking
+
+### Kubernetes Layer
+
+- OPA Gatekeeper
+- Namespace Isolation
+- RBAC
+- Kubernetes Secrets
+- Admission Controllers
+
+### Runtime Layer
+
+- Cilium
+- Network Policies
+- Hubble
+- Runtime Visibility
+
+### Supply Chain
+
+- GitHub Actions
+- Trivy
+- Snyk
+- Checkov
+- Gitleaks
+
+No individual control is responsible for securing the platform.
+
+Instead, multiple independent controls work together to reduce overall risk.
+
+---
+
+<!-- ========================================================= -->
+
+# DevSecOps Pipeline
+
+Modern infrastructure should never be deployed without validation.
+
+Every infrastructure change within TITAN passes through a secure CI/CD pipeline designed to identify configuration errors, exposed secrets, infrastructure misconfigurations, and vulnerable dependencies before deployment.
+
+Rather than viewing security as a separate process, TITAN integrates security directly into the software delivery lifecycle.
+
+This approach follows the principle of **Shift Left Security**, moving validation as early as possible in the development process.
+
+<!-- INSERT IMAGE: GitHub_Actions_Workflow.png -->
+
+---
+
+# Pipeline Workflow
+
+Every Pull Request follows the same validation process.
+
+```
+
+Developer
+
+↓
+
+Git Push
+
+↓
+
+GitHub Pull Request
+
+↓
+
+GitHub Actions
+
+↓
+
+Terraform Validation
+
+↓
+
+Gitleaks
+
+↓
+
+Checkov
+
+↓
+
+Trivy
+
+↓
+
+Snyk
+
+↓
+
+Terraform Plan
+
+↓
+
+Manual Review
+
+↓
+
+Terraform Apply
+
+↓
+
+AWS Platform
+
+```
+
+Every stage exists for a specific reason.
+
+No deployment reaches AWS without first passing automated validation.
+
+---
+
+# Why Multiple Security Tools?
+
+No single security scanner detects every category of issue.
+
+Each tool specializes in different aspects of infrastructure security.
+
+| Tool | Purpose |
+|-------|----------|
+| Terraform Validate | Syntax validation |
+| Gitleaks | Secret detection |
+| Checkov | Infrastructure security best practices |
+| Trivy | Filesystem, container, and IaC vulnerability scanning |
+| Snyk | Dependency vulnerability analysis |
+| GitHub Actions | Workflow automation |
+
+This layered approach increases confidence while reducing the likelihood of security issues reaching production.
+
+---
+
+# Shift Left Security
+
+Traditional security reviews occur after infrastructure has already been deployed.
+
+TITAN instead validates infrastructure before deployment.
+
+Advantages include:
+
+- Earlier vulnerability detection
+- Reduced remediation costs
+- Faster developer feedback
+- Improved deployment quality
+- More secure infrastructure by default
+
+Rather than treating security as a final approval step, it becomes an integrated part of the engineering workflow.
+
+---
+
+# Identity & Access Management
+
+Identity forms the foundation of every secure cloud platform.
+
+TITAN centralizes identity management using AWS IAM Identity Center to provide consistent authentication and authorization across AWS accounts.
+
+This architecture replaces long-lived IAM users with centralized identity management and role-based access.
+
+Core capabilities include:
+
+- Centralized authentication
+- Permission Sets
+- Cross-account access
+- Least privilege
+- Role assumption
+- Organizational identity governance
+
+<!-- INSERT IMAGE: IAM_Identity_Center.png -->
+
+---
+
+# Why Centralized Identity?
+
+As organizations scale, managing IAM users independently within each AWS account becomes operationally expensive and difficult to audit.
+
+Centralized identity management provides:
+
+- Consistent access control
+- Simplified onboarding
+- Simplified offboarding
+- Reduced credential sprawl
+- Improved auditing
+- Better security posture
+
+Identity therefore becomes an organizational service rather than an account-specific configuration.
+
+---
+
+# Platform Engineering in Practice
+
+The Kubernetes platform represents far more than a container orchestration system.
+
+It demonstrates how Platform Engineering combines infrastructure, automation, security, networking, governance, and operational excellence into a cohesive developer platform.
+
+Rather than asking application teams to understand every AWS service, TITAN provides a secure, opinionated foundation that enables engineers to focus on delivering business value while the platform enforces organizational standards automatically.
+
+
