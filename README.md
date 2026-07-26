@@ -1307,6 +1307,385 @@ This reinforces an important operational principle:
 
 > Building infrastructure is only half the job. Operating it responsibly—including understanding its financial impact—is equally important.
 
+<!-- ========================================================= -->
+# Architecture Decision Records (ADRs)
+
+One of the defining characteristics of mature engineering organizations is that technical decisions are documented—not just implemented.
+
+Throughout the development of TITAN, major architectural decisions were intentionally evaluated based on long-term maintainability, operational simplicity, scalability, security, and developer experience.
+
+The following summarizes several of the most significant design decisions that shaped the platform.
+
+---
+
+## ADR-001 — Why Terragrunt Instead of Native Terraform?
+
+Terraform is an excellent Infrastructure as Code tool, but as environments grow, managing multiple AWS accounts, environments, and reusable modules becomes increasingly difficult.
+
+Terragrunt was selected to provide:
+
+- DRY (Don't Repeat Yourself) configuration
+- Centralized remote state configuration
+- Environment inheritance
+- Dependency management
+- Consistent provider configuration
+- Simplified multi-account deployments
+
+This significantly reduced duplicated configuration while making the platform easier to extend as additional environments are introduced.
+
+---
+
+## ADR-002 — Why GitOps Instead of Manual kubectl Deployments?
+
+Manual deployments do not scale well across engineering teams.
+
+GitOps ensures that Git becomes the authoritative source of truth for Kubernetes.
+
+Benefits include:
+
+- Version-controlled deployments
+- Automated reconciliation
+- Rollback through Git history
+- Configuration drift correction
+- Auditable infrastructure changes
+
+This approach improves deployment consistency while reducing operational risk.
+
+---
+
+## ADR-003 — Why Amazon EKS?
+
+Operating Kubernetes should not require operating Kubernetes infrastructure.
+
+Amazon EKS provides a fully managed control plane while allowing engineering teams to retain full control over worker nodes, networking, security, and platform tooling.
+
+This allows Platform Engineers to spend more time building platform capabilities rather than maintaining Kubernetes itself.
+
+---
+
+## ADR-004 — Why Cilium?
+
+Traditional Kubernetes networking primarily focuses on connectivity.
+
+Cilium extends networking into security and observability through eBPF.
+
+Key advantages include:
+
+- Identity-aware networking
+- Layer 7 policy enforcement
+- High-performance packet processing
+- Deep network visibility
+- Native Hubble integration
+
+This aligns with the platform's security-first philosophy.
+
+---
+
+## ADR-005 — Why OPA Gatekeeper?
+
+Security policies should be enforced automatically—not documented and forgotten.
+
+OPA Gatekeeper enables organizational policies to be validated before workloads are admitted into the cluster.
+
+Examples include:
+
+- Blocking privileged containers
+- Enforcing required labels
+- Restricting Linux capabilities
+- Validating resource requests
+- Restricting insecure workloads
+
+Embedding policy into Kubernetes significantly reduces operational risk.
+
+---
+
+## ADR-006 — Why Multiple Security Services?
+
+No individual security product provides complete visibility.
+
+Instead of relying on a single tool, TITAN combines multiple complementary services.
+
+| Capability | Service |
+|------------|---------|
+| Threat Detection | GuardDuty |
+| Compliance | AWS Config |
+| Auditing | CloudTrail |
+| Findings Aggregation | Security Hub |
+| Identity Analysis | Access Analyzer |
+| Encryption | AWS KMS |
+| Admission Control | OPA Gatekeeper |
+| CI Security | Trivy, Snyk, Checkov, Gitleaks |
+
+This layered approach improves resilience while reducing single points of failure.
+
+---
+
+# Repository Structure
+
+The repository is intentionally organized around platform capabilities rather than AWS services.
+
+```text
+.
+├── .github/
+│   └── GitHub Actions workflows
+│
+├── docs/
+│   ├── architecture/
+│   ├── screenshots/
+│   ├── runbooks/
+│   └── adr/
+│
+├── kubernetes/
+│   ├── argocd/
+│   ├── gatekeeper/
+│   ├── cilium/
+│   ├── hubble/
+│   └── monitoring/
+│
+├── live/
+│   ├── dev/
+│   ├── staging/
+│   └── production/
+│
+├── modules/
+│   ├── networking/
+│   ├── organizations/
+│   ├── security/
+│   ├── observability/
+│   └── platform/
+│
+├── observability/
+│
+├── platform-api/
+│
+└── README.md
+```
+
+This structure reflects how many enterprise Platform Engineering teams organize reusable infrastructure, platform services, and operational documentation.
+
+---
+
+# Project Metrics
+
+The goal of TITAN was never to maximize the number of AWS services used.
+
+Instead, the focus was on building a cohesive, production-style platform composed of interoperating capabilities.
+
+### Platform Engineering
+
+- Enterprise Internal Developer Platform architecture
+- GitOps deployment model
+- Kubernetes platform engineering
+- Multi-account AWS foundation
+- Reusable Infrastructure as Code
+
+### Cloud Infrastructure
+
+- Multi-AZ networking
+- Public and private subnets
+- Managed Kubernetes
+- Enterprise IAM
+- Centralized encryption
+- Infrastructure lifecycle automation
+
+### Security
+
+- Defense-in-depth architecture
+- Continuous threat detection
+- Continuous compliance
+- Centralized security findings
+- Policy-as-Code
+- Supply chain security
+- Infrastructure security scanning
+
+### Observability
+
+- Metrics
+- Logs
+- Distributed traces
+- Kubernetes network visibility
+- Executive dashboards
+- Cloud-native monitoring
+
+### Operations
+
+- Automated deployments
+- Event-driven security automation
+- Cost governance
+- Disaster recovery through code
+- Operational documentation
+
+---
+
+# Engineering Challenges & Lessons Learned
+
+One of the primary goals of TITAN was to move beyond idealized architecture diagrams and experience the operational realities of building and maintaining an enterprise platform.
+
+The following examples represent several engineering challenges encountered during implementation.
+
+---
+
+## Terraform State Management
+
+### Challenge
+
+Managing remote Terraform state across multiple modules while avoiding duplicated backend configuration.
+
+### Resolution
+
+Migrated to native Amazon S3 lockfiles and standardized backend generation through Terragrunt.
+
+### Lesson Learned
+
+Infrastructure should have a single authoritative configuration source. Centralizing backend management reduced complexity and improved maintainability.
+
+---
+
+## Kubernetes Storage
+
+### Challenge
+
+Prometheus workloads remained in a pending state due to Persistent Volume Claim provisioning.
+
+### Resolution
+
+Investigated StorageClass configuration, Kubernetes events, and EKS storage integration before correcting the underlying storage configuration.
+
+### Lesson Learned
+
+Successful Kubernetes operations require understanding the interactions between storage, scheduling, and cloud infrastructure—not just Kubernetes manifests.
+
+---
+
+## OPA Gatekeeper
+
+### Challenge
+
+A required privileged workload was blocked by an admission policy.
+
+### Resolution
+
+Analyzed the policy violation and created a narrowly scoped exception rather than disabling enforcement globally.
+
+### Lesson Learned
+
+Well-designed guardrails should accommodate legitimate operational requirements without weakening the overall security posture.
+
+---
+
+## GitHub Actions
+
+### Challenge
+
+Security workflows required updates as GitHub Actions deprecated older Node.js runtimes.
+
+### Resolution
+
+Updated affected workflows and validated that automated security scanning continued to function correctly.
+
+### Lesson Learned
+
+Operational tooling evolves continuously. Maintaining automation is an ongoing engineering responsibility.
+
+---
+
+## Amazon EKS Costs
+
+### Challenge
+
+Managed Kubernetes infrastructure generated ongoing operational costs during platform development.
+
+### Resolution
+
+Used AWS Budgets and Cost Explorer to monitor spending, then decommissioned resources after validation while preserving architectural evidence through documentation and screenshots.
+
+### Lesson Learned
+
+Cost optimization is a continuous operational practice rather than a one-time exercise.
+
+---
+
+# Operational Documentation
+
+In enterprise environments, implementation is only one aspect of operating a platform.
+
+Comprehensive documentation enables future engineers to understand, maintain, and extend the system safely.
+
+Additional documentation included within this repository includes:
+
+- Architecture documentation
+- Engineering decision records
+- Operational runbooks
+- Platform diagrams
+- Implementation screenshots
+- Disaster recovery guidance
+
+These documents collectively describe not only how the platform was built, but also how it should be operated over time.
+
+---
+
+# Future Roadmap
+
+Although TITAN already demonstrates many capabilities expected from a modern Platform Engineering organization, several future enhancements remain under consideration.
+
+Potential areas of expansion include:
+
+- Internal Platform API
+- Self-service infrastructure provisioning
+- Developer Portal integration
+- AI-assisted operations
+- Platform scorecards
+- Automated golden path templates
+- Service catalog integration
+- Cross-cloud platform abstractions
+- Policy testing pipelines
+- Expanded platform analytics
+
+The objective is to continue evolving TITAN toward a fully featured Internal Developer Platform that emphasizes security, governance, automation, and developer experience.
+
+---
+
+# Additional Validation
+
+To keep this README focused on architecture and engineering decisions, only a subset of implementation screenshots are included throughout this document.
+
+A comprehensive evidence gallery—including AWS console screenshots, Terraform deployments, Kubernetes components, GitHub Actions workflows, dashboards, networking resources, security services, observability, and cost governance—is available in the repository.
+
+📂 **Implementation Evidence**
+
+```
+docs/
+└── screenshots/
+    ├── 01-architecture/
+    ├── 02-networking/
+    ├── 03-governance/
+    ├── 04-security/
+    ├── 05-kubernetes/
+    ├── 06-observability/
+    ├── 07-devsecops/
+    ├── 08-cost-governance/
+    └── 09-troubleshooting/
+```
+
+These screenshots provide visual confirmation of the platform's implementation while allowing the main README to remain focused on architectural concepts and engineering rationale.
+
+---
+
+# Closing Thoughts
+
+TITAN was built to explore the responsibilities of a modern Platform Engineering organization—not simply to provision cloud infrastructure.
+
+Throughout the project, emphasis was placed on engineering practices that extend beyond deployment:
+
+- Designing reusable platform capabilities instead of one-off infrastructure.
+- Embedding security into every layer of the platform rather than treating it as a separate process.
+- Automating governance to reduce operational overhead and improve consistency.
+- Prioritizing observability to support day-two operations and incident response.
+- Managing cloud costs as an engineering responsibility, not just a financial concern.
+- Documenting architectural decisions so future engineers can understand both the implementation and the reasoning behind it.
+
+Ultimately, TITAN reflects the idea that Platform Engineering is not defined by the technologies it uses, but by how those technologies are combined into a secure, scalable, and maintainable foundation that enables other engineering teams to deliver software more effectively.
+
 
 
 
