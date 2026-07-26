@@ -1651,7 +1651,9 @@ To keep this README focused on architecture and engineering decisions, only a su
 
 A comprehensive evidence gallery—including AWS console screenshots, Terraform deployments, Kubernetes components, GitHub Actions workflows, dashboards, networking resources, security services, observability, and cost governance—is available in the repository.
 
-📂 **Implementation Evidence**
+## 📸 Implementation Evidence
+
+**➡️ [Browse the Complete Implementation Evidence Gallery](https://github.com/<YOUR_USERNAME>/<YOUR_REPOSITORY>/tree/main/docs/implementation-evidence)**
 
 ```
 docs/
