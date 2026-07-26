@@ -1,14 +1,43 @@
-# TITAN (V1)
+# TITAN Enterprise Self-Service Platform (V1)
 
-Enterprise Internal Developer Platform (IDP)
+> **Enterprise AWS Platform Engineering | DevSecOps | Kubernetes | Internal Developer Platform**
 
+<p align="center">
 
-Platform Engineering • DevSecOps • Cloud Governance • Kubernetes
+**Secure • Governed • Self-Service • Automated**
 
-## Overview
+</p>
 
-Made to provision compliant AWS infrastructure in minutes instead of days using Terraform, GitOps, Kubernetes, and automated DevSecOps guardrails. This repository is built to demonstrate enterprise Platform Engineering, Cloud Governance,
-and Infrastructure Automation at production scale.
+---
+
+# Executive Summary
+
+TITAN is a production-style Enterprise Internal Developer Platform (IDP) designed to demonstrate how modern Platform Engineering teams build, secure, govern, and operate cloud infrastructure at scale.
+
+Rather than focusing solely on provisioning AWS resources, TITAN models the complete lifecycle of an enterprise platform—including Infrastructure as Code (IaC), Kubernetes, GitOps, DevSecOps, cloud governance, security automation, observability, operational documentation, and cost management.
+
+The platform was intentionally designed using enterprise architectural patterns commonly found in Fortune 500 organizations where security, standardization, compliance, and developer velocity are equally important.
+
+Instead of allowing engineering teams to manually provision infrastructure, TITAN provides reusable, opinionated platform capabilities that embed organizational standards directly into the deployment process.
+
+The result is a cloud platform that is:
+
+- Secure by default
+- Governed through automation
+- Observable from infrastructure to Kubernetes
+- Consistently deployed through Infrastructure as Code
+- Designed to evolve into a fully self-service Internal Developer Platform
+
+---
+
+<!-- ========================================================= -->
+
+# Architecture Overview
+
+The following diagram illustrates the overall architecture of TITAN.
+
+It intentionally focuses on business capabilities rather than individual AWS services, allowing both executive leadership and engineering teams to understand how the platform operates from end to end.
+
 
 <img src= https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/Titan_Diagram.png.png style="width:1000px;">
 
