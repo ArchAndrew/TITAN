@@ -25,7 +25,7 @@
 - [DevSecOps Pipeline](#devsecops-pipeline)
 - [Security Architecture](#-security-architecture)
 - [Observability Platform](#-observability-platform)
-- [Disaster Recovery](#-disaster-recovery)
+- [Disaster Recovery](#disaster-recovery-philosophy)
 - [Cost Governance](#cost-governance)
 - [Architecture Decision Records (ADRs)](#architecture-decision-records-adrs)
 - [Repository Structure](#repository-structure)
