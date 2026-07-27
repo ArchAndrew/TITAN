@@ -22,7 +22,7 @@
 - [GitOps with ArgoCD](#-gitops-with-argocd)
 - [Cilium & Hubble](#-cilium--hubble)
 - [Policy Enforcement with OPA Gatekeeper](#policy-enforcement-with-opa-gatekeeper)
-- [DevSecOps Pipeline](#-devsecops-pipeline)
+- [DevSecOps Pipeline](#devsecops-pipeline)
 - [Security Architecture](#-security-architecture)
 - [Observability Platform](#-observability-platform)
 - [Disaster Recovery](#-disaster-recovery)
