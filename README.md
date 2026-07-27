@@ -336,7 +336,7 @@ Everything within this layer is provisioned through Terraform and orchestrated u
 
 ---
 
-# 🏗️ Enterprise Cloud Foundation
+# ::🏗️ Enterprise Cloud Foundation
 
 The foundation of TITAN begins with a secure AWS Landing Zone.
 
@@ -386,7 +386,7 @@ This approach significantly reduces long-term operational complexity while impro
 
 ---
 
-#  🕸️ Enterprise Networking
+# ::🕸️ Enterprise Networking
 
 Networking forms the backbone of every cloud platform.
 
@@ -570,7 +570,7 @@ This enables:
 
 ---
 
-# Why Cilium?
+# :: Why Cilium?
 
 Several Kubernetes networking solutions exist.
 
@@ -703,7 +703,7 @@ Instead, multiple independent controls work together to reduce overall risk.
 
 <!-- ========================================================= -->
 
-# DevSecOps Pipeline
+# :♾️ DevSecOps Pipeline
 
 Modern infrastructure should never be deployed without validation.
 
