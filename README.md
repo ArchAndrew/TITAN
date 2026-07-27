@@ -15,9 +15,9 @@
 - [Architecture Overview](#-architecture-overview)
 - [Platform Philosophy](#-platform-philosophy)
 - [Business Problems Solved](#-business-problems-solved)
-- [Enterprise Cloud Foundation](#-enterprise-cloud-foundation)
-- [AWS Landing Zone](#--aws-landing-zone-design)
-- [Enterprise Networking](#-enterprise-networking)
+- [Enterprise Cloud Foundation](#enterprise-cloud-foundation)
+- [AWS Landing Zone Design](#aws-landing-zone-design)
+- [Enterprise Networking](#enterprise-networking)
 - [Amazon EKS Platform](#-amazon-eks-platform)
 - [GitOps with ArgoCD](#-gitops-with-argocd)
 - [Cilium & Hubble](#-cilium--hubble)
@@ -337,7 +337,7 @@ Everything within this layer is provisioned through Terraform and orchestrated u
 
 ---
 
-# ::🏗️ Enterprise Cloud Foundation
+# Enterprise Cloud Foundation
 
 The foundation of TITAN begins with a secure AWS Landing Zone.
 
@@ -387,7 +387,7 @@ This approach significantly reduces long-term operational complexity while impro
 
 ---
 
-# ::🕸️ Enterprise Networking
+# Enterprise Networking
 
 Networking forms the backbone of every cloud platform.
 
@@ -704,7 +704,7 @@ Instead, multiple independent controls work together to reduce overall risk.
 
 <!-- ========================================================= -->
 
-# :♾️DevSecOps Pipeline
+# DevSecOps Pipeline
 
 Modern infrastructure should never be deployed without validation.
 
