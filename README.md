@@ -1440,11 +1440,11 @@ This layered approach improves resilience while reducing single points of failur
 
 The repository is intentionally organized around platform capabilities rather than AWS services.
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/folder_hierarchy.png style="width:300px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/folder_hierarchy.png style="width:400px;">
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terragrunt_folder_hierarchy.png style="width:300px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terragrunt_folder_hierarchy.png style="width:400px;">
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terraform_folder_hierarchy.png style="width:300px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terraform_folder_hierarchy.png style="width:400px;">
 
 
 This structure reflects how many enterprise Platform Engineering teams organize reusable infrastructure, platform services, and operational documentation.
