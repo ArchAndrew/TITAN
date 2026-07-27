@@ -203,7 +203,7 @@ without manually investigating dozens of AWS services.
 
 ---
 
-#👍 Business Problems Solved
+# 👍 Business Problems Solved
 
 The table below summarizes the operational challenges TITAN was designed to address.
 
@@ -364,7 +364,7 @@ Key benefits include:
 
 ---
 
-# 🏛️ AWS Landing Zone Design
+#  🏛️ AWS Landing Zone Design
  
 The Landing Zone establishes the operational baseline before any workloads are deployed.
 
@@ -386,7 +386,7 @@ This approach significantly reduces long-term operational complexity while impro
 
 ---
 
-# 🕸️ Enterprise Networking
+#  🕸️ Enterprise Networking
 
 Networking forms the backbone of every cloud platform.
 
@@ -416,7 +416,7 @@ This architecture follows AWS networking best practices by minimizing public exp
 
 ---
 
-#❔ Why This Architecture Matters
+# ❔ Why This Architecture Matters
 
 Every layer of TITAN was designed around one central idea:
 
