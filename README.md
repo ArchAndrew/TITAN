@@ -861,30 +861,8 @@ The security architecture follows a defense-in-depth strategy.
 
 Rather than depending on a single security product, multiple independent security controls reduce overall organizational risk.
 
-```
-                 GitHub Actions
-                        │
-          Terraform / Checkov / Trivy
-                        │
-                        ▼
-                 AWS Infrastructure
-                        │
-        ┌───────────────┼───────────────┐
-        ▼               ▼               ▼
- GuardDuty        AWS Config      CloudTrail
-        │               │               │
-        └───────────────┼───────────────┘
-                        ▼
-                 Security Hub
-                        │
-             EventBridge Rules
-                        │
-                    Lambda
-                        │
-                    SNS Alerts
-                        │
-               Executive Dashboards
-```
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/git_flow_diagram.png style="width:800px;">
+
 
 <img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/SecurityHub.png style="width:800px;">
 
