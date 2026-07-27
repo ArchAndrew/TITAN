@@ -37,7 +37,7 @@
 
 ---
 
-# Executive Summary
+#  Executive Summary
 
 TITAN is a production-style Enterprise Internal Developer Platform (IDP) designed to demonstrate how modern Platform Engineering teams build, secure, govern, and operate cloud infrastructure at scale.
 
