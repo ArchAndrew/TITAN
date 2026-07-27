@@ -706,7 +706,7 @@ Instead, multiple independent controls work together to reduce overall risk.
 
 <!-- ========================================================= -->
 
-# ♾️ DevSecOps Pipeline
+# DevSecOps Pipeline
 
 Modern infrastructure should never be deployed without validation.
 
@@ -1086,7 +1086,7 @@ Centralized key management simplifies auditing while maintaining consistent encr
 
 ---
 
-# ♾️ Security Automation
+# Security Automation
 
 Security findings become significantly more valuable when they trigger automated responses.
 
