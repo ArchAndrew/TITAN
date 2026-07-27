@@ -18,7 +18,7 @@
 - [Enterprise Cloud Foundation](#enterprise-cloud-foundation)
 - [AWS Landing Zone Design](#aws-landing-zone-design)
 - [Enterprise Networking](#enterprise-networking)
-- [Amazon EKS Platform](#amazon-eks)
+- [Amazon EKS Platform](#-amazon-eks)
 - [GitOps with ArgoCD](#gitops-with-argocd)
 - [Cilium & Hubble](#-cilium--hubble)
 - [Policy Enforcement with OPA Gatekeeper](#policy-enforcement-with-opa-gatekeeper)
