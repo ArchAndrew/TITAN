@@ -31,7 +31,7 @@
 - [Repository Structure](#repository-structure)
 - [Project Metrics](#project-metrics)
 - [Engineering Challenges & Lessons Learned](#engineering-challenges--lessons-learned)
-- [Implementation Evidence](#implementation-evidence)
+- [Implementation Evidence](#-implementation-evidence)
 - [Roadmap](#roadmap)
 
 
