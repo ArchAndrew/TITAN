@@ -568,9 +568,9 @@ This enables:
 - High-performance packet processing
 - Advanced traffic visibility
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cillium%2BHubble%2BHelm.png style="width:800px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cilium%2BHubble%2BHelm.png style="width:800px;">
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cillium_Running.png style="width:800px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cilium_Running.png style="width:800px;">
 
 
 ---
