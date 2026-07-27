@@ -39,7 +39,7 @@ The following diagram illustrates the overall architecture of TITAN.
 It intentionally focuses on business capabilities rather than individual AWS services, allowing both executive leadership and engineering teams to understand how the platform operates from end to end.
 
 
-<img src= https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/Titan_Diagram.png.png style="width:1000px;">
+<img src= https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/Titan_Diagram.png style="width:1000px;">
 
 # Why TITAN Exists
 
