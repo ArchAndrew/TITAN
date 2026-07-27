@@ -367,7 +367,7 @@ Key benefits include:
 
 ---
 
-#  🏛️ AWS Landing Zone Design
+# AWS Landing Zone Design
  
 The Landing Zone establishes the operational baseline before any workloads are deployed.
 
