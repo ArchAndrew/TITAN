@@ -67,7 +67,7 @@ TITAN was built around that philosophy.
 
 ---
 
-# Platform Philosophy
+# 🧠 Platform Philosophy
 
 Every architectural decision within TITAN follows five core principles.
 
@@ -309,7 +309,7 @@ Everything within this layer is provisioned through Terraform and orchestrated u
 
 ---
 
-# Enterprise Cloud Foundation
+# 🏗️ Enterprise Cloud Foundation
 
 The foundation of TITAN begins with a secure AWS Landing Zone.
 
@@ -389,7 +389,7 @@ This architecture follows AWS networking best practices by minimizing public exp
 
 ---
 
-# Why This Architecture Matters
+#❔ Why This Architecture Matters
 
 Every layer of TITAN was designed around one central idea:
 
@@ -855,7 +855,7 @@ This creates a feedback loop where infrastructure is continuously evaluated thro
 
 ---
 
-# Security Architecture
+# 🔐 Security Architecture
 
 The security architecture follows a defense-in-depth strategy.
 
@@ -1078,7 +1078,7 @@ Centralized key management simplifies auditing while maintaining consistent encr
 
 ---
 
-# Security Automation
+# ♾️ Security Automation
 
 Security findings become significantly more valuable when they trigger automated responses.
 
@@ -1130,7 +1130,7 @@ These dashboards provide leadership with high-level visibility while allowing en
 
 ---
 
-# Observability Platform
+# 🔍 Observability Platform
 
 Operating distributed cloud platforms requires visibility into infrastructure, applications, Kubernetes, and networking.
 
@@ -1309,7 +1309,7 @@ These services allow engineers to identify unexpected spending while encouraging
 
 ---
 
-# Why Cost Governance Matters
+# 💰 Why Cost Governance Matters
 
 Cloud infrastructure can scale rapidly.
 
@@ -1651,7 +1651,7 @@ These documents collectively describe not only how the platform was built, but a
 
 ---
 
-# Future Roadmap
+# 🚧 Future Roadmap
 
 Although TITAN already demonstrates many capabilities expected from a modern Platform Engineering organization, several future enhancements remain under consideration.
 
