@@ -10,6 +10,31 @@
 
 ---
 
+## 🚀 Quick Navigation
+
+**Architecture**
+- 🏗️ [Architecture Overview](#-architecture-overview)
+- ☁️ [Cloud Foundation](#-enterprise-cloud-foundation)
+- 🌐 [Networking](#-enterprise-networking)
+
+**Platform Engineering**
+- ☸️ [Amazon EKS](#-amazon-eks-platform)
+- 🚀 [GitOps (ArgoCD)](#-gitops-with-argocd)
+- 🔒 [OPA Gatekeeper](#-policy-enforcement-with-opa-gatekeeper)
+- 🌐 [Cilium & Hubble](#-cilium--hubble)
+
+**Security**
+- 🛡️ [Security Architecture](#-security-architecture)
+- 🔍 [Observability](#-observability-platform)
+- ⚙️ [DevSecOps Pipeline](#-devsecops-pipeline)
+
+**Project**
+- 📈 [Metrics](#-project-metrics)
+- 🧠 [Engineering Challenges](#-engineering-challenges--lessons-learned)
+- 📸 [Implementation Evidence](#-implementation-evidence)
+
+---
+
 # Executive Summary
 
 TITAN is a production-style Enterprise Internal Developer Platform (IDP) designed to demonstrate how modern Platform Engineering teams build, secure, govern, and operate cloud infrastructure at scale.
