@@ -10,30 +10,6 @@
 
 ---
 
-## 🚀 Quick Navigation
-
-**Architecture**
-- [Architecture Overview](#-architecture-overview)
-- [Cloud Foundation](#-enterprise-cloud-foundation)
-- [Networking](#-enterprise-networking)
-
-**Platform Engineering**
-- [Amazon EKS](#-amazon-eks-platform)
-- [GitOps (ArgoCD)](#-gitops-with-argocd)
-- [OPA Gatekeeper](#-policy-enforcement-with-opa-gatekeeper)
-- [Cilium & Hubble](#-cilium--hubble)
-
-**Security**
-- [Security Architecture](#-security-architecture)
-- [Observability](#-observability-platform)
-- [DevSecOps Pipeline](#-devsecops-pipeline)
-
-**Project**
-- [Engineering Challenges](#-engineering-challenges--lessons-learned)
-- [Implementation Evidence](#-implementation-evidence)
-
----
-
 # 📑 Table of Contents
 
 - [Executive Summary](#-executive-summary)
