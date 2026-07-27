@@ -19,7 +19,7 @@
 - [AWS Landing Zone Design](#aws-landing-zone-design)
 - [Enterprise Networking](#enterprise-networking)
 - [Amazon EKS Platform](#-amazon-eks-platform)
-- [GitOps with ArgoCD](#-gitops-with-argocd)
+- [GitOps with ArgoCD](#gitops-with-argocd)
 - [Cilium & Hubble](#-cilium--hubble)
 - [Policy Enforcement with OPA Gatekeeper](#policy-enforcement-with-opa-gatekeeper)
 - [DevSecOps Pipeline](#devsecops-pipeline)
@@ -495,7 +495,7 @@ Node groups provide the compute resources used to host workloads while allowing 
 
 ---
 
-# :: GitOps with ArgoCD
+# GitOps with ArgoCD
 
 One of the core architectural decisions within TITAN was adopting GitOps as the deployment model.
 
