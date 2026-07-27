@@ -571,7 +571,7 @@ This enables:
 
 ---
 
-# :: Why Cilium?
+# Why Cilium?
 
 Several Kubernetes networking solutions exist.
 
@@ -704,7 +704,7 @@ Instead, multiple independent controls work together to reduce overall risk.
 
 <!-- ========================================================= -->
 
-# ♾️ DevSecOps Pipeline
+# :♾️DevSecOps Pipeline
 
 Modern infrastructure should never be deployed without validation.
 
