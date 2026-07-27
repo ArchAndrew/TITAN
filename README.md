@@ -1525,7 +1525,7 @@ The following examples represent several engineering challenges encountered duri
 
 ---
 
-⚠️ ## Control Tower Brownfield Deployment
+## ⚠️Control Tower Brownfield Deployment
 
 ### Challenge
 
@@ -1566,7 +1566,7 @@ The experience reinforced an important Platform Engineering principle:
 
 ---
 
-⚠️ ## Terraform State Management
+## ⚠️ Terraform State Management
 
 ### Challenge
 
@@ -1582,7 +1582,7 @@ Infrastructure should have a single authoritative configuration source. Centrali
 
 ---
 
-⚠️ ## Kubernetes Storage
+## ⚠️ Kubernetes Storage
 
 ### Challenge
 
@@ -1598,7 +1598,7 @@ Successful Kubernetes operations require understanding the interactions between 
 
 ---
 
-⚠️ ## OPA Gatekeeper
+## ⚠️ OPA Gatekeeper
 
 ### Challenge
 
@@ -1614,7 +1614,7 @@ Well-designed guardrails should accommodate legitimate operational requirements 
 
 ---
 
-⚠️ ## GitHub Actions
+## ⚠️ GitHub Actions
 
 ### Challenge
 
@@ -1630,7 +1630,7 @@ Operational tooling evolves continuously. Maintaining automation is an ongoing e
 
 ---
 
-⚠️ ## Amazon EKS Costs
+## ⚠️ Amazon EKS Costs
 
 ### Challenge
 
