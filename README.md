@@ -16,13 +16,13 @@
 - [Platform Philosophy](#-platform-philosophy)
 - [Business Problems Solved](#-business-problems-solved)
 - [Enterprise Cloud Foundation](#-enterprise-cloud-foundation)
-- [AWS Landing Zone](#-aws-landing-zone-design)
+- [AWS Landing Zone](#--aws-landing-zone-design)
 - [Enterprise Networking](#-enterprise-networking)
 - [Amazon EKS Platform](#-amazon-eks-platform)
 - [GitOps with ArgoCD](#-gitops-with-argocd)
 - [Cilium & Hubble](#-cilium--hubble)
 - [Policy Enforcement with OPA Gatekeeper](#policy-enforcement-with-opa-gatekeeper)
-- [DevSecOps Pipeline](#devsecops-pipeline)
+- [DevSecOps Pipeline](#--devsecops-pipeline)
 - [Security Architecture](#-security-architecture)
 - [Observability Platform](#-observability-platform)
 - [Disaster Recovery](#-disaster-recovery)
@@ -33,6 +33,7 @@
 - [Engineering Challenges & Lessons Learned](#engineering-challenges--lessons-learned)
 - [Implementation Evidence](#-implementation-evidence)
 - [Roadmap](#roadmap)
+
 
 
 ---
