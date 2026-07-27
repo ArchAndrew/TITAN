@@ -861,7 +861,7 @@ The security architecture follows a defense-in-depth strategy.
 
 Rather than depending on a single security product, multiple independent security controls reduce overall organizational risk.
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/git_flow_diagram.png style="width:800px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/diagrams/git_flow_diagram.png style="width:300px;">
 
 
 <img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/SecurityHub.png style="width:800px;">
