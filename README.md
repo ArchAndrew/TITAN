@@ -536,6 +536,11 @@ This enables:
 - High-performance packet processing
 - Advanced traffic visibility
 
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cillium%2BHubble%2BHelm.png style="width:800px;">
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cillium_Running.png style="width:800px;">
+
+
 ---
 
 # Why Cilium?
@@ -600,6 +605,11 @@ Policy enforcement occurs before workloads reach the cluster.
 
 This significantly reduces operational risk.
 
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/gatekeeper.png style="width:800px;">
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Gatekeeper2.png  style="width:800px;">
+
+
 ---
 
 # Engineering Challenge: OPA Gatekeeper
@@ -615,6 +625,8 @@ This reinforced an important Platform Engineering principle:
 > Platform guardrails should be intentionally designed—not bypassed.
 
 Although exceptions occasionally become necessary, they should always remain explicit, documented, and narrowly scoped.
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/policy_as_code.png style="width:800px;">
 
 ---
 
