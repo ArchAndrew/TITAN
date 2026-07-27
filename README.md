@@ -607,7 +607,7 @@ This significantly reduces operational risk.
 
 <img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/gatekeeper.png style="width:800px;">
 
-<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Gatekeeper2.png  style="width:800px;">
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Gatekeeper2.png style="width:800px;">
 
 
 ---
