@@ -18,7 +18,7 @@
 - [Enterprise Cloud Foundation](#enterprise-cloud-foundation)
 - [AWS Landing Zone Design](#aws-landing-zone-design)
 - [Enterprise Networking](#enterprise-networking)
-- [Amazon EKS](#amazon-eks)
+- [Amazon EKS Platform](#amazon-eks-platform)
 - [GitOps with ArgoCD](#gitops-with-argocd)
 - [Cilium & Hubble](#cilium--hubble)
 - [Policy Enforcement with OPA Gatekeeper](#policy-enforcement-with-opa-gatekeeper)
@@ -451,7 +451,7 @@ The Kubernetes platform was intentionally designed around four engineering princ
 
 ---
 
-# Amazon EKS
+# Amazon EKS Platform
 
 Building a Kubernetes platform requires balancing operational flexibility with long-term maintenance.
 
