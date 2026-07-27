@@ -1682,20 +1682,6 @@ A comprehensive evidence gallery—including AWS console screenshots, Terraform 
 
 **➡️ [Browse the Complete Implementation Evidence Gallery](https://github.com/ArchAndrew/TITAN/tree/main/docs/implementation-evidence)**
 
-```
-docs/
-└── screenshots/
-    ├── 01-architecture/
-    ├── 02-networking/
-    ├── 03-governance/
-    ├── 04-security/
-    ├── 05-kubernetes/
-    ├── 06-observability/
-    ├── 07-devsecops/
-    ├── 08-cost-governance/
-    └── 09-troubleshooting/
-```
-
 These screenshots provide visual confirmation of the platform's implementation while allowing the main README to remain focused on architectural concepts and engineering rationale.
 
 ---
