@@ -1680,7 +1680,7 @@ A comprehensive evidence gallery—including AWS console screenshots, Terraform 
 
 ## 📸 Implementation Evidence
 
-**➡️ [Browse the Complete Implementation Evidence Gallery](https://github.com/<YOUR_USERNAME>/<YOUR_REPOSITORY>/tree/main/docs/implementation-evidence)**
+**➡️ [Browse the Complete Implementation Evidence Gallery](https://github.com/ArchAndrew/TITAN/tree/main/docs/implementation-evidence)**
 
 ```
 docs/
