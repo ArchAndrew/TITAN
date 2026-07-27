@@ -127,7 +127,7 @@ Developers are therefore encouraged toward secure deployment patterns instead of
 
 ---
 
-## 4. Developers Should Consume Platforms — Not Build Them
+## 4. Developers Should Consume Platforms, Not Build Them
 
 One of the primary goals of Platform Engineering is reducing cognitive load for software developers.
 
