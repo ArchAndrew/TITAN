@@ -451,7 +451,7 @@ The Kubernetes platform was intentionally designed around four engineering princ
 
 ---
 
-# Why Amazon EKS?
+# Amazon EKS
 
 Building a Kubernetes platform requires balancing operational flexibility with long-term maintenance.
 
@@ -547,7 +547,9 @@ Git therefore becomes both the deployment mechanism and the operational document
 
 ---
 
-# Kubernetes Network Security
+# Cilium & Hubble
+
+## Kubernetes Network Security
 
 Networking inside Kubernetes differs significantly from traditional virtual machine networking.
 
