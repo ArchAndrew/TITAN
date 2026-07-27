@@ -808,7 +808,8 @@ Core capabilities include:
 - Role assumption
 - Organizational identity governance
 
-<!-- INSERT IMAGE: IAM_Identity_Center.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Groups.png style="width:800px;">
+
 
 ---
 
@@ -885,7 +886,7 @@ Rather than depending on a single security product, multiple independent securit
          Executive Dashboards
 ```
 
-<!-- INSERT IMAGE: SecurityHub_Dashboard.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/SecurityHub.png style="width:800px;">
 
 ---
 
@@ -1072,7 +1073,8 @@ Examples include:
 
 Centralized key management simplifies auditing while maintaining consistent encryption practices across the environment.
 
-<!-- INSERT IMAGE: KMS_Keys.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/KMS.png style="width:800px;">
+
 
 ---
 
@@ -1239,7 +1241,7 @@ Rather than requiring engineers to manually query individual monitoring systems,
 
 Dashboards provide both executive summaries and engineering-level operational detail.
 
-<!-- INSERT IMAGE: Grafana_Dashboard.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Grafana2.png style="width:800px;">
 
 ---
 
@@ -1259,7 +1261,7 @@ CloudWatch monitors services including:
 
 Together, CloudWatch and Grafana provide comprehensive visibility across both AWS infrastructure and Kubernetes workloads.
 
-<!-- INSERT IMAGE: CloudWatch_Dashboard.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cloudwatch_dashboards.png style="width:800px;">
 
 ---
 
@@ -1300,9 +1302,10 @@ TITAN incorporates cost governance through:
 
 These services allow engineers to identify unexpected spending while encouraging responsible cloud consumption.
 
-<!-- INSERT IMAGE: AWS_Budgets.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Budget.png style="width:800px;">
 
-<!-- INSERT IMAGE: Cost_Explorer.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Cost_Explorer.png style="width:800px;">
+
 
 ---
 
@@ -1437,42 +1440,12 @@ This layered approach improves resilience while reducing single points of failur
 
 The repository is intentionally organized around platform capabilities rather than AWS services.
 
-```text
-.
-├── .github/
-│   └── GitHub Actions workflows
-│
-├── docs/
-│   ├── architecture/
-│   ├── screenshots/
-│   ├── runbooks/
-│   └── adr/
-│
-├── kubernetes/
-│   ├── argocd/
-│   ├── gatekeeper/
-│   ├── cilium/
-│   ├── hubble/
-│   └── monitoring/
-│
-├── live/
-│   ├── dev/
-│   ├── staging/
-│   └── production/
-│
-├── modules/
-│   ├── networking/
-│   ├── organizations/
-│   ├── security/
-│   ├── observability/
-│   └── platform/
-│
-├── observability/
-│
-├── platform-api/
-│
-└── README.md
-```
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/folder_hierarchy.png style="width:600px;">
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terragrunt_folder_hierarchy.png style="width:600px;">
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Terraform_folder_hierarchy.png style="width:600px;">
+
 
 This structure reflects how many enterprise Platform Engineering teams organize reusable infrastructure, platform services, and operational documentation.
 
