@@ -1525,6 +1525,47 @@ The following examples represent several engineering challenges encountered duri
 
 ---
 
+## Control Tower Brownfield Deployment
+
+### Challenge
+
+One of the most technically demanding aspects of TITAN was deploying AWS Control Tower into an existing AWS Organization rather than a newly created (greenfield) environment.
+
+Unlike a greenfield deployment, the existing environment already contained organizational resources, IAM roles, logging infrastructure, Terraform-managed services, and platform components that had to be evaluated for compatibility with Control Tower's opinionated landing zone architecture.
+
+Throughout implementation, several deployment issues required investigation, including:
+
+- Landing Zone manifest validation
+- AWSControlTowerAdmin role configuration
+- AWSControlTowerExecution trust relationships
+- StackSet deployment failures
+- CloudFormation execution permissions
+- Existing Organizations configuration
+- Brownfield resource compatibility
+- Landing Zone initialization failures
+
+Successfully integrating Control Tower required understanding not only the service itself, but also how it interacts with AWS Organizations, IAM, CloudFormation, StackSets, Security Hub, AWS Config, CloudTrail, and existing organizational resources.
+
+### Resolution
+
+The implementation was approached iteratively by validating prerequisites, reviewing AWS documentation, troubleshooting deployment failures, and refining the Landing Zone configuration until the platform aligned with Control Tower's architectural requirements.
+
+Rather than rebuilding the AWS environment from scratch, the objective was to understand how enterprise governance services integrate into an existing organization while preserving previously deployed infrastructure wherever practical.
+
+This process also highlighted the importance of distinguishing between greenfield reference architectures and the operational realities of brownfield enterprise environments.
+
+### Lesson Learned
+
+Brownfield cloud transformations require significantly more planning than greenfield deployments.
+
+Enterprise environments rarely begin from a blank slate. Existing identities, accounts, organizational structures, infrastructure, and governance controls introduce constraints that must be carefully evaluated before new platform services can be integrated.
+
+The experience reinforced an important Platform Engineering principle:
+
+> Building a platform is only part of the challenge. Successfully integrating new platform capabilities into an existing enterprise environment is where much of the real engineering work occurs.
+
+---
+
 ## Terraform State Management
 
 ### Challenge
