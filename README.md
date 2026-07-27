@@ -381,11 +381,11 @@ Public resources remain isolated from internal workloads while private workloads
 
 This architecture follows AWS networking best practices by minimizing public exposure while maintaining operational flexibility.
 
-<!-- INSERT IMAGE: VPC.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/VPC.png style="width:800px;">
 
-<!-- INSERT IMAGE: RouteTable1.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/VPC.png style="width:800px;">
 
-<!-- INSERT IMAGE: NAT.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/RouteTable1.png style="width:800px;">
 
 ---
 
@@ -415,7 +415,9 @@ The Kubernetes platform was intentionally designed around four engineering princ
 - Observable
 - Policy Enforced
 
-<!-- INSERT IMAGE: EKS_Node_Groups.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/EKS.png style="width:800px;">
+
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Pods1.png style="width:800px;">
 
 ---
 
@@ -492,7 +494,8 @@ GitOps asks:
 
 If not, ArgoCD automatically restores the desired state.
 
-<!-- INSERT IMAGE: ArgoCD_Applications.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/ArgoCD_Portal.png style="width:800px;">
+
 
 ---
 
@@ -533,8 +536,6 @@ This enables:
 - High-performance packet processing
 - Advanced traffic visibility
 
-<!-- INSERT IMAGE: Cilium_Status.png -->
-
 ---
 
 # Why Cilium?
@@ -574,7 +575,7 @@ Rather than guessing how services communicate, Platform Engineers can observe:
 
 This dramatically simplifies troubleshooting while improving overall platform visibility.
 
-<!-- INSERT IMAGE: Hubble_UI.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/Hubble-monitoring.png style="width:800px;">
 
 ---
 
