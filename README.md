@@ -13,25 +13,24 @@
 ## 🚀 Quick Navigation
 
 **Architecture**
-- 🏗️ [Architecture Overview](#-architecture-overview)
-- ☁️ [Cloud Foundation](#-enterprise-cloud-foundation)
-- 🌐 [Networking](#-enterprise-networking)
+- [Architecture Overview](#-architecture-overview)
+- [Cloud Foundation](#-enterprise-cloud-foundation)
+- [Networking](#-enterprise-networking)
 
 **Platform Engineering**
-- ☸️ [Amazon EKS](#-amazon-eks-platform)
-- 🚀 [GitOps (ArgoCD)](#-gitops-with-argocd)
-- 🔒 [OPA Gatekeeper](#-policy-enforcement-with-opa-gatekeeper)
-- 🌐 [Cilium & Hubble](#-cilium--hubble)
+- [Amazon EKS](#-amazon-eks-platform)
+- [GitOps (ArgoCD)](#-gitops-with-argocd)
+- [OPA Gatekeeper](#-policy-enforcement-with-opa-gatekeeper)
+- [Cilium & Hubble](#-cilium--hubble)
 
 **Security**
-- 🛡️ [Security Architecture](#-security-architecture)
-- 🔍 [Observability](#-observability-platform)
-- ⚙️ [DevSecOps Pipeline](#-devsecops-pipeline)
+- [Security Architecture](#-security-architecture)
+- [Observability](#-observability-platform)
+- [DevSecOps Pipeline](#-devsecops-pipeline)
 
 **Project**
-- 📈 [Metrics](#-project-metrics)
-- 🧠 [Engineering Challenges](#-engineering-challenges--lessons-learned)
-- 📸 [Implementation Evidence](#-implementation-evidence)
+- [Engineering Challenges](#-engineering-challenges--lessons-learned)
+- [Implementation Evidence](#-implementation-evidence)
 
 ---
 
