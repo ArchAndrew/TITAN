@@ -1,4 +1,4 @@
-# TITAN - Enterprise Internal Developer Platform (IDP) (V1)
+# TITAN — Enterprise Internal Developer Platform (IDP) (V1)
 
 > **Enterprise AWS Platform Engineering | DevSecOps | Kubernetes | Internal Developer Platform**
 
