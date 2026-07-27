@@ -203,7 +203,7 @@ without manually investigating dozens of AWS services.
 
 ---
 
-# Business Problems Solved
+#👍 Business Problems Solved
 
 The table below summarizes the operational challenges TITAN was designed to address.
 
@@ -364,8 +364,8 @@ Key benefits include:
 
 ---
 
-# AWS Landing Zone Design
-
+# 🏛️ AWS Landing Zone Design
+ 
 The Landing Zone establishes the operational baseline before any workloads are deployed.
 
 The implementation includes:
@@ -386,7 +386,7 @@ This approach significantly reduces long-term operational complexity while impro
 
 ---
 
-# Enterprise Networking
+# 🕸️ Enterprise Networking
 
 Networking forms the backbone of every cloud platform.
 
@@ -492,7 +492,7 @@ Node groups provide the compute resources used to host workloads while allowing 
 
 ---
 
-# GitOps with ArgoCD
+# :: GitOps with ArgoCD
 
 One of the core architectural decisions within TITAN was adopting GitOps as the deployment model.
 
