@@ -883,7 +883,7 @@ Rather than depending on a single security product, multiple independent securit
                         │
                     SNS Alerts
                         │
-         Executive Dashboards
+               Executive Dashboards
 ```
 
 <img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/SecurityHub.png style="width:800px;">
