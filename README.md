@@ -59,7 +59,7 @@ The result is a cloud platform that is:
 
 <!-- ========================================================= -->
 
-#  Architecture Overview
+#  👀 Architecture Overview
 
 The following diagram illustrates the overall architecture of TITAN.
 
