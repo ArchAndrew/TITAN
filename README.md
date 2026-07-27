@@ -686,7 +686,7 @@ Rather than viewing security as a separate process, TITAN integrates security di
 
 This approach follows the principle of **Shift Left Security**, moving validation as early as possible in the development process.
 
-<!-- INSERT IMAGE: GitHub_Actions_Workflow.png -->
+<img src=https://github.com/ArchAndrew/TITAN/blob/main/docs/implementation-evidence/CheckOv3.png style="width:800px;">
 
 ---
 
